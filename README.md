@@ -1,16 +1,16 @@
-# ceh_xaringan
+# ceh_quarto_slides
 
-Minimalist `R` xaringan theme for html presentations using UKCEH style/colours.
+Minimalist `R` Quarto theme for html presentations using UKCEH style/colours.
 
 ## Example Title Slide
 
 Here is the title slide:
 
-![](img/ex/title.png)
+![](images/title.png)
 
 ## Full Example Presentation
 
-Example presentation at [https://nerc-ceh.github.io/ceh_xaringan]( https://nerc-ceh.github.io/ceh_xaringan/). 
+Example presentation at [https://nerc-ceh.github.io/ceh_quarto_slides]( https://nerc-ceh.github.io/ceh_quarto_slides/). 
 
 ## Usage
 
@@ -30,25 +30,30 @@ format:
     chalkboard: 
       buttons: false
     preview-links: auto
-    logo: img/logo/UKCEH-Logo_Short_Positive_RGB.png
+    logo: images/logo/UKCEH-Logo_Short_Positive_RGB.png
 ---
 
 ```
 
 ## Rendering html from Rmarkdown
-Run the command
-`rmarkdown::render("./index.Rmd")`
+To produce the html slides from the R markdown file (.Rmd or .qmd), we run the command:
 
-or use the knit button in Rstudio.
+`quarto::quarto_render("./index.qmd")`
 
-## Offline Usage
+or use the knit button in Rstudio. If your system fails to find quarto, set the path and make sure the quarto library is installed:
 
-* One big drawback is (used to be) that HTML presentations require a working internet connection during the presentation. 
-* It's not always possible to guarantee that. Sigh.
-* There is a great alternative/backup. Just print the HTML slides to PDF with [decktape](https://github.com/astefanutti/decktape)! I.e. you do
+```
+# use quarto installed with Rstudio; set path first time
+# Sys.setenv(QUARTO_PATH="C:/Program Files/RStudio/resources/app/bin/quarto/bin/quarto.exe")
+library(quarto)
+quarto_render("./index.qmd")`
+```
 
-    ```
-    decktape index.html presentation.pdf --chrome-arg=--disable-web-security
-    ```
-    to end up with this [PDF](presentation.pdf)
+To run this template, you will need to install the packages it uses for the examples e.g.
+
+```
+install.packages("leaflet")
+# or if you use renv:
+# renv::install("leaflet")
+```
 
