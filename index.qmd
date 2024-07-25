@@ -21,12 +21,25 @@ library(quarto)
 system.time(quarto_render("./index.qmd"))
 ```
 
+```{r startup}
+library(data.table)
+library(ggplot2)
+```
+## The Reproducibility Crisis
+1. What it means
+2. The cause - high "false discovery" rates
+3. An ecological example: soil carbon change
+4. Solutions: a change in perspective in statistical thinking
+
 ## The Reproducibility Crisis
 ::: columns
 ::: {.column width="60%"}
 ![\label{fig:Ioannidis2005} Ioannidis, 2005, PLOS Medicine](images/Ioannidis2005.png)
 :::
 ::: {.column width="40%"}
+
+
+"Reproducibility" of results, not methods.
 :::
 :::
 
@@ -68,7 +81,175 @@ print(p)
 ```
 We can only see 5% of the universe.
 
-## Example plots of FDR vs power, bias,  prior
+<!--- {reproducibility crisis -->
+## *"Why most published research findings are false"*
+
+High "false discovery rates", often much higher than 5 %
+
+because of:
+
+- low prior $P(\mathrm{effect})$ - unlikely / rare effects
+- low statistical power - low signal:noise
+- bias - systematic uncertainty
+<!--- } -->
+
+# Understanding false discovery rates {background="#37a635"}
+
+## Disease testing    
+![](images/false_discovery_covid.png)
+
+## Generic experiments    
+![](images/false_discovery_expt_1.png)
+        
+## Generic experiments
+![](images/false_discovery_expt_2.png)
+            
+## Effect of prior probability
+```{r plotfdr}
+alpha <- 0.05
+v_power <- c(0.2, 0.4, 0.8)
+v_prior <- seq(from = 0, to = 1, by = 0.01)
+v_bias  <- seq(from = 0, to = 1, by = 0.05)
+dt <- as.data.table(expand.grid(power = v_power, prior = v_prior, u = v_bias))
+
+# expected fdr, from Colquhoun 2014
+dt[, ppv := (prior * power)  / (prior * power  + alpha * (1 - prior))]
+dt[, fdr := 1 - ppv]
+
+# without bias, from Ioannidis 2005
+dt[, R := prior / (1- prior)] # prior odds
+# dt[, PPV := power * R / (R - (1 - power) * R + alpha)]
+# with bias, u, from Ioannidis 2005
+dt[, ppv_u := (power * R + u * (1- power) * R) / 
+  (R + alpha - (1 - power) * R + u - u * alpha + u * (1 - power) * R)]
+dt[, fdr_u := 1 - ppv_u]
+
+p <- ggplot(dt[power == 0.8], aes(prior, fdr*100, colour = as.factor(power), group = power))
+p <- p + geom_line() + ylim(0, 100)
+p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
+# add legend title
+p <- p + scale_color_discrete(name = "Power")
+p
+```
+
+## Generic experiments: low power  
+![](images/false_discovery_expt_3.png)
+
+## Effect of low power
+```{r lowpower}
+p <- ggplot(dt, aes(prior, fdr*100, colour = as.factor(power), group = power))
+p <- p + geom_line() + ylim(0, 100)
+p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
+# add legend title
+p <- p + scale_color_discrete(name = "Power")
+p
+```
+
+## Generic experiments: bias
+![](images/false_discovery_expt_4.png)
+
+## Effect of bias
+```{r bias}
+p <- ggplot(dt[prior == 0.5], aes(u, fdr_u*100, colour = as.factor(power), group = power))
+p <- p + geom_line() + ylim(0, 100) + xlim(0, 1)
+p <- p + xlab("Bias") + ylab("False Discovery Rate (%)")
+p <- p + scale_color_discrete(name = "Power")
+#p <- p + facet_wrap(~ power, ncol = 1)
+p
+```
+
+# An ecological example: soil carbon change {background="#37a635"}
+
+## "Nature-based solutions" to climate change
+
+::: columns
+::: {.column width="40%"}
+- "rejuvenative farming"
+- biochar
+- reduced stocking
+- rewilding
+:::
+
+::: {.column width="60%"}
+![](images/soc_activities.png){.border .border-thick}
+:::
+:::
+
+## "Nature-based solutions" to climate change
+
+::: columns
+::: {.column width="40%"}
+BUT:
+
+- change in soil carbon very hard to verify
+- huge potential for "greenwashing"
+:::
+
+::: {.column width="60%"}
+![](images/soc_activities.png){.border .border-thick}
+:::
+:::
+
+## Measuring soil carbon: field
+![](images/soil_coring_1.png)
+![](images/soil_coring_2.png)
+Take soil cores
+![](images/soil_core.png)
+
+## Measuring soil carbon: lab
+![](images/measuring_LOI.png)
+
+## Soil carbon: integrate over depth
+
+::: columns
+::: {.column width="70%"}
+![](images/soil_C_with_depth.png)
+:::
+
+::: {.column width="30%"}
+$\mathrm{log} C = \alpha + \beta \times \mathrm{depth}$
+:::
+:::
+
+## Soil carbon: integrate over space
+
+::: columns
+::: {.column width="70%"}
+![](images/EC_SoilC_maps_eachYear.png)
+:::
+
+::: {.column width="30%"}
+Extrapolate samples to whole field with spatial model
+
+$\mu_{\mathrm{field}} = f(\theta, C_{\mathrm{samples}})$
+:::
+:::
+
+## Soil carbon: uncertainties
+
+>- We would typically say we have "measurements of soil carbon".
+>- But we actually have measurements of weight loss
+>- from a sample of a sample ...
+>- from which we predict carbon fraction with a model ...
+>- and predict carbon stock to depth with a model ...
+>- and extrapolate this in space with a model ...
+>- and we (usually) ignore most of the uncertainties!
+
+## Soil carbon: uncertainties
+
+It gets worse.
+
+>- Systematic uncertainties (bias) from different:
+    - surveyors
+    - sampling protocols
+    - areas & depths sampled
+    - labs & instruments
+    - lab protocols
+>- very hard to be consistent over ~20 years.
+
+## Results
+Plot of FDR for typical experiments with typical power and bias
+Bias is the killer
 
 ## The ASA statement
 ::: columns
@@ -83,39 +264,6 @@ We can only see 5% of the universe.
 :::
 :::
  Stop using *p* values and "statistical significance".
-
-<!--- {reproducibility crisis -->
-## *"Why most published research findings are false"*
-
-High "false discovery rates", often much higher than 5 %.
-
-In ecology, these stem from:
-
-- unpropagated measurement error
-- unacknowledged measurement bias
-- low prevalence of effects
-    - i.e. prior $P(\mathrm{effect})$ is small
-<!--- } -->
-
-# Understanding false discovery rates {background="#37a635"}
-
-## Covid testing    
-![](images/false_discovery_covid.png)
-    
-## Land use change from EO
-![](images/false_discovery_luc.png)
-
-## Generic experiments    
-![](images/false_discovery_expt_1.png)
-        
-## Generic experiments
-![](images/false_discovery_expt_2.png)
-        
-## Generic experiments: low power  
-![](images/false_discovery_expt_3.png)
-        
-## Experiments: low prevalence
-![](images/false_discovery_expt_4.png)
 
 ## 
 ::: columns
@@ -150,382 +298,3 @@ Patterson & Gimlin, 1967
 :::
 
 ## A Copernican Revolution {background-color="white" background-video="images/copernican_revolution.mp4"}
-
-# 1st level header on Bright Green {background="#37a635"}
-# 1st level header on Garden Green {background="#00883c"}
-# 1st level header on Teal {background="#0383a4"}
-## 2nd level header
-### 3rd level header
-
-## Pretty Code {auto-animate="true"}
-
--   Over 20 syntax highlighting themes available
--   Default theme optimized for accessibility
-
-``` r
-# Define a server for the Shiny app
-function(input, output) {
-  
-  # Fill in the spot we created for a plot
-  output$phonePlot <- renderPlot({
-    # Render a barplot
-  })
-}
-```
-
-## Code Animations {auto-animate="true"}
-
--   Over 20 syntax highlighting themes available
--   Default theme optimized for accessibility
-
-``` r
-# Define a server for the Shiny app
-function(input, output) {
-  
-  # Fill in the spot we created for a plot
-  output$phonePlot <- renderPlot({
-    # Render a barplot
-    barplot(WorldPhones[,input$region]*1000, 
-            main=input$region,
-            ylab="Number of Telephones",
-            xlab="Year")
-  })
-}
-```
-
-## Line Highlighting
-
--   Highlight specific lines for emphasis
--   Incrementally highlight additional lines
-
-``` {.python code-line-numbers="4-5|7|10"}
-import numpy as np
-import matplotlib.pyplot as plt
-
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
-```
-
-## Executable Code
-
-```{r}
-#| echo: true
-#| fig-width: 10
-#| fig-height: 4.5
-library(ggplot2)
-ggplot(mtcars, aes(hp, mpg, color = am)) +
-  geom_point() +
-  geom_smooth(formula = y ~ x, method = "loess")
-```
-
-::: footer
-Learn more: [Executable Code](https://quarto.org/docs/presentations/revealjs/#executable-code)
-:::
-
-## LaTeX Equations
-
-[MathJax](https://www.mathjax.org/) rendering of equations to HTML
-
-::: columns
-::: {.column width="40%"}
-``` tex
-\begin{gather*}
-a_1=b_1+c_1\\
-a_2=b_2+c_2-d_2+e_2
-\end{gather*}
-
-\begin{align}
-a_{11}& =b_{11}&
-  a_{12}& =b_{12}\\
-a_{21}& =b_{21}&
-  a_{22}& =b_{22}+c_{22}
-\end{align}
-```
-:::
-
-::: {.column width="60%"}
-```{=tex}
-\begin{gather*}
-a_1=b_1+c_1\\
-a_2=b_2+c_2-d_2+e_2
-\end{gather*}
-```
-```{=tex}
-\begin{align}
-a_{11}& =b_{11}&
-  a_{12}& =b_{12}\\
-a_{21}& =b_{21}&
-  a_{22}& =b_{22}+c_{22}
-\end{align}
-```
-:::
-:::
-
-::: footer
-Learn more: [LaTeX Equations](https://quarto.org/docs/authoring/markdown-basics.html#equations)
-:::
-
-## Column Layout {.smaller}
-
-Arrange content into columns of varying widths:
-
-::: columns
-::: {.column width="35%"}
-#### Motor Trend Car Road Tests
-
-The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles.
-:::
-
-::: {.column width="3%"}
-:::
-
-::: {.column width="62%"}
-```{r}
-knitr::kable(head(mtcars)[,c("mpg",	"cyl", "disp", "hp", "wt")])
-```
-:::
-:::
-
-::: footer
-Learn more: [Multiple Columns](https://quarto.org/docs/presentations/revealjs/#multiple-columns)
-:::
-
-## Incremental Lists
-
-Lists can optionally be displayed incrementally:
-
-::: incremental
--   First item
--   Second item
--   Third item
-:::
-
-. . .
-
-<br/> Insert pauses to make other types of content display incrementally.
-
-## Fragments
-
-Incremental text display and animation with fragments:
-
-<br/>
-
-::: {.fragment .fade-in}
-Fade in
-:::
-
-::: {.fragment .fade-up}
-Slide up while fading in
-:::
-
-::: {.fragment .fade-left}
-Slide left while fading in
-:::
-
-::: {.fragment .fade-in-then-semi-out}
-Fade in then semi out
-:::
-
-. . .
-
-::: {.fragment .strike}
-Strike
-:::
-
-::: {.fragment .highlight-red}
-Highlight red
-:::
-
-## Slide Backgrounds {background="#43464B"}
-
-Set the `background` attribute on a slide to change the background color (all CSS color formats are supported).
-
-Different background transitions are available via the `background-transition` option.
-
-## Media Backgrounds {background="#43464B" background-image="img/milky-way.jpeg"}
-
-You can also use the following as a slide background:
-
--   An image: `background-image`
-
--   A video: `background-video`
-
--   An iframe: `background-iframe`
-
-## Auto-Animate {auto-animate="true" auto-animate-easing="ease-in-out"}
-
-Automatically animate matching elements across slides with Auto-Animate.
-
-::: r-hstack
-::: {data-id="box1" auto-animate-delay="0" style="background: #2780e3; width: 200px; height: 150px; margin: 10px;"}
-:::
-
-::: {data-id="box2" auto-animate-delay="0.1" style="background: #3fb618; width: 200px; height: 150px; margin: 10px;"}
-:::
-
-::: {data-id="box3" auto-animate-delay="0.2" style="background: #e83e8c; width: 200px; height: 150px; margin: 10px;"}
-:::
-:::
-
-## Auto-Animate {auto-animate="true" auto-animate-easing="ease-in-out"}
-
-Automatically animate matching elements across slides with Auto-Animate.
-
-::: r-stack
-::: {data-id="box1" style="background: #2780e3; width: 350px; height: 350px; border-radius: 200px;"}
-:::
-
-::: {data-id="box2" style="background: #3fb618; width: 250px; height: 250px; border-radius: 200px;"}
-:::
-
-::: {data-id="box3" style="background: #e83e8c; width: 150px; height: 150px; border-radius: 200px;"}
-:::
-:::
-
-## Slide Transitions {.smaller}
-
-The next few slides will transition using the `slide` transition
-
-| Transition | Description                                                            |
-|------------|------------------------------------------------------------------------|
-| `none`     | No transition (default, switch instantly)                              |
-| `fade`     | Cross fade                                                             |
-| `slide`    | Slide horizontally                                                     |
-| `convex`   | Slide at a convex angle                                                |
-| `concave`  | Slide at a concave angle                                               |
-| `zoom`     | Scale the incoming slide so it grows in from the center of the screen. |
-
-
-## Tabsets {.smaller .scrollable transition="slide"}
-
-::: panel-tabset
-### Plot
-
-```{r}
-library(ggplot2)
-ggplot(mtcars, aes(hp, mpg, color = am)) +
-  geom_point() +
-  geom_smooth(formula = y ~ x, method = "loess")
-```
-
-### Data
-
-```{r}
-knitr::kable(mtcars)
-```
-:::
-
-## Interactive Slides {.smaller transition="slide"}
-
-Include Jupyter widgets and htmlwidgets in your presentations
-
-```{r}
-#| echo: false
-#| fig-height: 5
-library(leaflet)
-leaflet() %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
-```
-
-## Preview Links
-
-Navigate to hyperlinks without disrupting the flow of your presentation.
-
-Use the `preview-links` option to open links in an iframe on top of your slides. Try clicking the link below for a demonstration:
-
-::: {style="text-align: center; margin-top: 1em"}
-[Matplotlib: Visualization with Python](https://matplotlib.org/){preview-link="true" style="text-align: center"}
-:::
-
-## Themes
-
-10 Built-in Themes (or [create your own](https://quarto.org/docs/presentations/revealjs/themes.html#creating-themes))
-
-::: {layout-ncol="2"}
-![](img/moon.png)
-
-![](img/sky.png)
-:::
-
-## Easy Navigation
-
-::: {style="margin-bottom: 0.9em;"}
-Quickly jump to other parts of your presentation
-:::
-
-::: {layout="[1, 20]"}
-![](img/presentation-menu.png){width="41"}
-
-Toggle the slide menu with the menu button (bottom left of slide) to go to other slides and access presentation tools.
-:::
-
-You can also press `m` to toggle the menu open and closed.
-
-## Chalkboard {chalkboard-buttons="true"}
-
-::: {style="margin-bottom: 0.9em;"}
-Free form drawing and slide annotations
-:::
-
-::: {layout="[1, 20]"}
-![](img/presentation-chalkboard.png){width="41"}
-
-Use the chalkboard button at the bottom left of the slide to toggle the chalkboard.
-:::
-
-::: {layout="[1, 20]"}
-![](img/presentation-notes-canvas.png){width="41"}
-
-Use the notes canvas button at the bottom left of the slide to toggle drawing on top of the current slide.
-:::
-
-You can also press `b` to toggle the chalkboard or `c` to toggle the notes canvas.
-
-## Point of View
-
-Press `o` to toggle overview mode:
-
-![](img/overview-mode.png){.border}
-
-Hold down the `Alt` key (or `Ctrl` in Linux) and click on any element to zoom towards it---try it now on this slide.
-
-
-## Speaker View
-
-Press `s` (or use the presentation menu) to open speaker view
-
-![](img/speaker-view.png){fig-align="center" style="border: 3px solid #dee2e6;" width="780"}
-
-## Authoring Tools {.smaller}
-
-Live side-by-side preview for any notebook or text editor including Jupyter and VS Code
-
-::: columns
-::: {.column width="50%"}
-![](img/jupyter-edit.png){.border .border-thick}
-:::
-
-::: {.column width="50%"}
-![](img/jupyter-preview.png){.border .border-thick}
-:::
-:::
-
-## Authoring Tools {.smaller}
-
-RStudio includes an integrated presentation preview pane
-
-![](img/rstudio.png){.border width="900"}
-
-
-## And More...
-
--   [Touch](https://quarto.org/docs/presentations/revealjs/advanced.html#touch-navigation) optimized (presentations look great on mobile, swipe to navigate slides)
--   [Footer & Logo](https://quarto.org/docs/presentations/revealjs/#footer-logo) (optionally specify custom footer per-slide)
--   [Auto-Slide](https://quarto.org/docs/presentations/revealjs/presenting.html#auto-slide) (step through slides automatically, without any user input)
--   [Multiplex](https://quarto.org/docs/presentations/revealjs/presenting.html#multiplex) (allows your audience to follow the slides of the presentation you are controlling on their own phone, tablet or laptop).
