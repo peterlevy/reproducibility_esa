@@ -45,7 +45,7 @@ Robert Pirsig
 
 ## Unpublished work as Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
 
-```{r}
+```{r darkmatter}
 library(magrittr)
 library(dplyr)
 library(ggplot2)
