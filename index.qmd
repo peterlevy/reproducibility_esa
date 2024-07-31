@@ -5,12 +5,14 @@ author: "Peter Levy, UK Centre for Ecology & Hydrology"
 date: "</br> '2024-08-07'"
 format:
   revealjs:
-    theme: [default, ceh.scss]  
+    theme: [default, ceh.scss]
     slide-number: true
-    chalkboard: 
+    chalkboard:
       buttons: false
     preview-links: auto
     logo: images/logo/UKCEH-Logo_Short_Positive_RGB.png
+execute:
+  cache: true
 ---
 
 ```{r render, eval = FALSE, include=FALSE}
@@ -26,15 +28,10 @@ library(data.table)
 library(ggplot2)
 ```
 
-## The real purpose of scientific method
-
-*"... is to make sure Nature hasn't misled you into thinking you know something you don't actually know."*
-
-Robert Pirsig, 1974
-
 ## The Reproducibility Crisis
-1. What it means
-2. The cause - high "false discovery" rates
+1. The causes:
+- the publishing filter
+- high "false discovery" rates
 3. An ecological example: soil carbon change
 4. Solutions: a change in perspective in statistical thinking
 
@@ -63,8 +60,8 @@ y <- rnorm(10000, 0, 33)
 # hist(y)
 cutoff <- quantile(y, probs = 0.95)
 
-df_dens <- density(y, from = -100, to = 100) %$% 
-  data.frame(x = x, y = y) %>% 
+df_dens <- density(y, from = -100, to = 100) %$%
+  data.frame(x = x, y = y) %>%
   mutate(area = x >= cutoff)
 names(df_dens) <- c("Effect_size", "Frequency", "Published")
 p_dark <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
@@ -78,8 +75,8 @@ print(p_dark)
 # remove the significance level criterion
 cutoff <- quantile(y, probs = 0.001)
 
-df_dens <- density(y, from = -100, to = 100) %$% 
-  data.frame(x = x, y = y) %>% 
+df_dens <- density(y, from = -100, to = 100) %$%
+  data.frame(x = x, y = y) %>%
   mutate(area = x >= cutoff)
 names(df_dens) <- c("Effect_size", "Frequency", "Published")
 p_light <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
@@ -104,15 +101,15 @@ because of:
 
 # Understanding false discovery rates {background="#37a635"}
 
-## Disease testing    
+## Disease testing
 ![](images/false_discovery_covid.png)
 
-## Generic experiments    
+## Generic experiments
 ![](images/false_discovery_expt_1.png)
-        
+
 ## Generic experiments
 ![](images/false_discovery_expt_2.png)
-            
+
 ## Effect of prior probability
 ```{r plotfdr}
 alpha <- 0.05
@@ -129,7 +126,7 @@ dt[, fdr := 1 - ppv]
 dt[, R := prior / (1- prior)] # prior odds
 # dt[, PPV := power * R / (R - (1 - power) * R + alpha)]
 # with bias, u, from Ioannidis 2005
-dt[, ppv_u := (power * R + u * (1- power) * R) / 
+dt[, ppv_u := (power * R + u * (1- power) * R) /
   (R + alpha - (1 - power) * R + u - u * alpha + u * (1 - power) * R)]
 dt[, fdr_u := 1 - ppv_u]
 
@@ -141,7 +138,7 @@ p <- p + scale_color_discrete(name = "Power")
 p
 ```
 
-## Generic experiments: low power  
+## Generic experiments: low power
 ![](images/false_discovery_expt_3.png)
 
 ## Effect of low power
@@ -201,15 +198,13 @@ p
 ## "Nature-based solutions" to climate change
 
 ::: columns
-::: {.column width="40%"}
-BUT:
-
-- change in soil carbon very hard to verify
-- huge potential for "greenwashing"
+::: {.column width="50%"}
+Barley
+![](images/barley.jpg){.border .border-thick}
 :::
-
-::: {.column width="60%"}
-![](images/soc_activities.png){.border .border-thick}
+::: {.column width="50%"}
+*Miscanthus*
+![](images/miscanthus.jpg){.border .border-thick}
 :::
 :::
 
@@ -236,17 +231,8 @@ $\mathrm{log} C = \alpha + \beta \times \mathrm{depth}$
 
 ## Soil carbon: integrate over space
 
-::: columns
-::: {.column width="70%"}
 ![](images/EC_SoilC_maps_eachYear.png)
-:::
 
-::: {.column width="30%"}
-Extrapolate samples to whole field with spatial model
-
-$\mu_{\mathrm{field}} = f(\theta, C_{\mathrm{samples}})$
-:::
-:::
 
 ## Soil carbon: uncertainties
 
@@ -260,19 +246,67 @@ $\mu_{\mathrm{field}} = f(\theta, C_{\mathrm{samples}})$
 
 ## Soil carbon: uncertainties
 
-It gets worse.
+Systematic uncertainties (bias) from different:
 
->- Systematic uncertainties (bias) from different:
-    - surveyors
-    - sampling protocols
-    - areas & depths sampled
-    - labs & instruments
-    - lab protocols
->- very hard to be consistent over ~20 years.
+- surveyors
+- sampling protocols
+- areas & depths sampled
+- labs & instruments
+- lab protocols
 
-## Results
-Plot of FDR for typical experiments with typical power and bias
--Bias is the killer
+Very hard to be consistent over >10 years.
+
+## Results - low power and bias
+```{r fdrsoilc}
+source("R/false_discovery_rate.R")
+n_sims <- 20000
+mu_t1 <- 15
+sigma_s <- 1.5
+d_true  <- mu_t1 * 0.05
+v_n    <- c(5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 80, 100)
+# plot(v_n, v_fdr)
+# calc_fdr(n = 9, mu_t1 = mu_t1, d_true = 0.75, sigma_s = sigma_s, sigma_b = 0, n_sims = 1000)
+v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 0, n_sims = n_sims)
+dt_b0 <- data.table(n = v_n, fdr = v_fdr, bias = 0)
+v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 0.5, n_sims = n_sims)
+dt_b1 <- data.table(n = v_n, fdr = v_fdr, bias = 0.5)
+v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 1.0, n_sims = n_sims)
+dt_b2 <- data.table(n = v_n, fdr = v_fdr, bias = 1.0)
+dt <- rbind(dt_b0, dt_b1, dt_b2)
+
+p <- ggplot(dt, aes(n, fdr*100, color = as.factor(bias)))
+p <- p + geom_line(linewidth = 1) + ylim(0, 70)
+p <- p + geom_vline(xintercept = 9, linetype = "dashed", colour = "black")
+p <- p + xlab("Number of samples") + ylab("False Discovery Rate (%)")
+# add legend title
+p <- p + scale_color_discrete(name = "Bias")
+p
+```
+
+Prior probability of 0.5
+
+## Results - low prior probability
+
+```{r fdrsoilc2}
+P_H1 <- 0.3
+v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 0, P_H1 = P_H1, n_sims = n_sims)
+dt_b0 <- data.table(n = v_n, fdr = v_fdr, bias = 0)
+v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 0.5, P_H1 = P_H1, n_sims = n_sims)
+dt_b1 <- data.table(n = v_n, fdr = v_fdr, bias = 0.5)
+v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 1.0, P_H1 = P_H1, n_sims = n_sims)
+dt_b2 <- data.table(n = v_n, fdr = v_fdr, bias = 1.0)
+dt <- rbind(dt_b0, dt_b1, dt_b2)
+
+p <- ggplot(dt, aes(n, fdr*100, color = as.factor(bias)))
+p <- p + geom_line(linewidth = 1) + ylim(0, 70)
+p <- p + geom_vline(xintercept = 9, linetype = "dashed", colour = "black")
+p <- p + xlab("Number of samples") + ylab("False Discovery Rate (%)")
+# add legend title
+p <- p + scale_color_discrete(name = "Bias")
+p
+```
+
+Prior probability of 0.3
 
 # Solutions {background="#37a635"}
 
@@ -293,14 +327,23 @@ print(p_light)
 ```
 Characterise the model parameter posterior distribution.
 
+
 ## Soil carbon change
 - model the OP
 - provide the posterior distribution
-    - [change | data, $\theta_{OP}$]
-- monetize the change accounting for uncertainty
+- [change | data, $\theta_{OP}$]
+- monetize the change, accounting for uncertainty
 
 # Final Thoughts {background="#37a635"}
-## 
+
+## The real purpose of scientific method
+
+*"... is to make sure Nature hasn't misled you into thinking you know something you don't actually know."*
+
+Robert Pirsig, 1974
+
+
+##
 ::: columns
 ::: {.column width="50%"}
 *"All models are wrong, but some are useful."*
@@ -314,7 +357,7 @@ George Box, 1976.
 :::
 :::
 
-## 
+##
 ::: columns
 ::: {.column width="50%"}
 *"All models are wrong, but some are useful."*

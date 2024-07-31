@@ -342,16 +342,16 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 
   <p class="date">2024-08-07</p>
 </section>
-<section id="the-real-purpose-of-scientific-method" class="slide level2">
-<h2>The real purpose of scientific method</h2>
-<p><em>“… is to make sure Nature hasn’t misled you into thinking you know something you don’t actually know.”</em></p>
-<p>Robert Pirsig, 1974</p>
-</section>
 <section id="the-reproducibility-crisis" class="slide level2">
 <h2>The Reproducibility Crisis</h2>
 <ol type="1">
-<li>What it means</li>
-<li>The cause - high “false discovery” rates</li>
+<li>The causes:</li>
+</ol>
+<ul>
+<li>the publishing filter</li>
+<li>high “false discovery” rates</li>
+</ul>
+<ol start="3" type="1">
 <li>An ecological example: soil carbon change</li>
 <li>Solutions: a change in perspective in statistical thinking</li>
 </ol>
@@ -370,9 +370,6 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <p>“Reproducibility”<br> of <span style="color:red">results</span>,<br> not methods.</p>
 </div>
 </div>
-</section>
-<section id="the-reproducibility-crisis-2" class="slide level2">
-<h2>The Reproducibility Crisis</h2>
 </section>
 <section id="unpublished-work-as-dark-matter" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
 <h2>Unpublished work as Dark Matter</h2>
@@ -462,14 +459,10 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <section id="nature-based-solutions-to-climate-change-1" class="slide level2">
 <h2>“Nature-based solutions” to climate change</h2>
 <div class="columns">
-<div class="column" style="width:40%;">
-<p>BUT:</p>
-<ul>
-<li>change in soil carbon very hard to verify</li>
-<li>huge potential for “greenwashing”</li>
-</ul>
-</div><div class="column" style="width:60%;">
-<p><img data-src="images/soc_activities.png" class="border border-thick"></p>
+<div class="column" style="width:50%;">
+<p>Barley <img data-src="images/barley.jpg" class="border border-thick"></p>
+</div><div class="column" style="width:50%;">
+<p><em>Miscanthus</em> <img data-src="images/miscanthus.jpg" class="border border-thick"></p>
 </div>
 </div>
 </section>
@@ -493,15 +486,8 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </section>
 <section id="soil-carbon-integrate-over-space" class="slide level2">
 <h2>Soil carbon: integrate over space</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<p><img data-src="images/EC_SoilC_maps_eachYear.png"></p>
-</div><div class="column" style="width:30%;">
-<p>Extrapolate samples to whole field with spatial model</p>
-<p><span class="math inline">\(\mu_{\mathrm{field}} = f(\theta, C_{\mathrm{samples}})\)</span></p>
-</div>
-</div>
-</section>
+
+<img data-src="images/EC_SoilC_maps_eachYear.png" class="r-stretch"></section>
 <section id="soil-carbon-uncertainties" class="slide level2">
 <h2>Soil carbon: uncertainties</h2>
 <ul>
@@ -516,20 +502,25 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </section>
 <section id="soil-carbon-uncertainties-1" class="slide level2">
 <h2>Soil carbon: uncertainties</h2>
-<p>It gets worse.</p>
+<p>Systematic uncertainties (bias) from different:</p>
 <ul>
-<li class="fragment">Systematic uncertainties (bias) from different:</li>
-<li class="fragment">surveyors</li>
-<li class="fragment">sampling protocols</li>
-<li class="fragment">areas &amp; depths sampled</li>
-<li class="fragment">labs &amp; instruments</li>
-<li class="fragment">lab protocols</li>
-<li class="fragment">very hard to be consistent over ~20 years.</li>
+<li>surveyors</li>
+<li>sampling protocols</li>
+<li>areas &amp; depths sampled</li>
+<li>labs &amp; instruments</li>
+<li>lab protocols</li>
 </ul>
+<p>Very hard to be consistent over &gt;10 years.</p>
 </section>
-<section id="results" class="slide level2">
-<h2>Results</h2>
-<p>Plot of FDR for typical experiments with typical power and bias -Bias is the killer</p>
+<section id="results---low-power-and-bias" class="slide level2">
+<h2>Results - low power and bias</h2>
+
+<img data-src="index_files/figure-revealjs/fdrsoilc-1.png" width="960" class="r-stretch"><p>Prior probability of 0.5</p>
+</section>
+<section id="results---low-prior-probability" class="slide level2">
+<h2>Results - low prior probability</h2>
+
+<img data-src="index_files/figure-revealjs/fdrsoilc2-1.png" width="960" class="r-stretch"><p>Prior probability of 0.3</p>
 </section></section>
 <section>
 <section id="solutions" class="title-slide slide level1 center" data-background="#37a635">
@@ -556,17 +547,20 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <h2>Soil carbon change</h2>
 <ul>
 <li>model the OP</li>
-<li>provide the posterior distribution
-<ul>
+<li>provide the posterior distribution</li>
 <li>[change | data, <span class="math inline">\(\theta_{OP}\)</span>]</li>
-</ul></li>
-<li>monetize the change accounting for uncertainty</li>
+<li>monetize the change, accounting for uncertainty</li>
 </ul>
 </section></section>
 <section>
 <section id="final-thoughts" class="title-slide slide level1 center" data-background="#37a635">
 <h1>Final Thoughts</h1>
 
+</section>
+<section id="the-real-purpose-of-scientific-method" class="slide level2">
+<h2>The real purpose of scientific method</h2>
+<p><em>“… is to make sure Nature hasn’t misled you into thinking you know something you don’t actually know.”</em></p>
+<p>Robert Pirsig, 1974</p>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
