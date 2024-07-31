@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="Peter Levy, UK Centre for Ecology &amp; Hydrology">
-  <meta name="dcterms.date" content="2024-07-25">
+  <meta name="dcterms.date" content="2024-08-07">
   <title>Tackling The Reproducibility Crisis In Ecology</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -340,7 +340,12 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </div>
 </div>
 
-  <p class="date">2024-07-25</p>
+  <p class="date">2024-08-07</p>
+</section>
+<section id="the-real-purpose-of-scientific-method" class="slide level2">
+<h2>The real purpose of scientific method</h2>
+<p><em>“… is to make sure Nature hasn’t misled you into thinking you know something you don’t actually know.”</em></p>
+<p>Robert Pirsig, 1974</p>
 </section>
 <section id="the-reproducibility-crisis" class="slide level2">
 <h2>The Reproducibility Crisis</h2>
@@ -362,25 +367,12 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
-<p>“Reproducibility” of results, not methods.</p>
+<p>“Reproducibility”<br> of <span style="color:red">results</span>,<br> not methods.</p>
 </div>
 </div>
 </section>
 <section id="the-reproducibility-crisis-2" class="slide level2">
 <h2>The Reproducibility Crisis</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/Ioannidis2005.png"></p>
-<figcaption> https://doi.org/10.1371/journal.pmed.0020124</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<p><em>“The real purpose of scientific method is to make sure Nature hasn’t misled you into thinking you know something you don’t actually know.”</em></p>
-<p>Robert Pirsig</p>
-</div>
-</div>
 </section>
 <section id="unpublished-work-as-dark-matter" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
 <h2>Unpublished work as Dark Matter</h2>
@@ -434,7 +426,19 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <section id="effect-of-bias" class="slide level2">
 <h2>Effect of bias</h2>
 
-<img data-src="index_files/figure-revealjs/bias-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="index_files/figure-revealjs/bias-1.png" width="960" class="r-stretch"></section>
+<section id="the-asa-statement" class="slide level2">
+<h2>The ASA statement</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/Wasserstein.png"></p>
+<p>2016</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/Wasserstein2.png"> 2019</p>
+</div>
+</div>
+<p>Stop using <em>p</em> values and “statistical significance”.</p>
+</section></section>
 <section>
 <section id="an-ecological-example-soil-carbon-change" class="title-slide slide level1 center" data-background="#37a635">
 <h1>An ecological example: soil carbon change</h1>
@@ -525,19 +529,44 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </section>
 <section id="results" class="slide level2">
 <h2>Results</h2>
-<p>Plot of FDR for typical experiments with typical power and bias Bias is the killer</p>
+<p>Plot of FDR for typical experiments with typical power and bias -Bias is the killer</p>
+</section></section>
+<section>
+<section id="solutions" class="title-slide slide level1 center" data-background="#37a635">
+<h1>Solutions</h1>
+
 </section>
-<section id="the-asa-statement" class="slide level2">
-<h2>The ASA statement</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="images/Wasserstein.png"></p>
-<p>2016</p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="images/Wasserstein2.png"> 2019</p>
-</div>
-</div>
-<p>Stop using <em>p</em> values and “statistical significance”.</p>
+<section id="a-copernican-revolution" class="slide level2" data-background-color="white" data-background-video="images/copernican_revolution.mp4">
+<h2>A Copernican Revolution</h2>
+</section>
+<section id="a-copernican-revolution-1" class="slide level2" data-background-color="white" data-background-image="images/copernican_revolution.png">
+<h2>A Copernican Revolution</h2>
+</section>
+<section id="what-does-this-mean-in-practice" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
+<h2>What does this mean in practice?</h2>
+
+<img data-src="index_files/figure-revealjs/darkmatter2-1.png" width="960" class="r-stretch"><p>Don’t focus on testing a null hypothesis.</p>
+</section>
+<section id="what-does-this-mean-in-practice-1" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
+<h2>What does this mean in practice?</h2>
+
+<img data-src="index_files/figure-revealjs/darkmatter3-1.png" width="960" class="r-stretch"><p>Characterise the model parameter posterior distribution.</p>
+</section>
+<section id="soil-carbon-change" class="slide level2">
+<h2>Soil carbon change</h2>
+<ul>
+<li>model the OP</li>
+<li>provide the posterior distribution
+<ul>
+<li>[change | data, <span class="math inline">\(\theta_{OP}\)</span>]</li>
+</ul></li>
+<li>monetize the change accounting for uncertainty</li>
+</ul>
+</section></section>
+<section>
+<section id="final-thoughts" class="title-slide slide level1 center" data-background="#37a635">
+<h1>Final Thoughts</h1>
+
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
@@ -564,9 +593,6 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <p><img data-src="images/bigfoot.jpg"></p>
 </div>
 </div>
-</section>
-<section id="a-copernican-revolution" class="slide level2" data-background-color="white" data-background-video="images/copernican_revolution.mp4">
-<h2>A Copernican Revolution</h2>
 <div class="quarto-auto-generated-content">
 <p><img src="images/logo/UKCEH-Logo_Short_Positive_RGB.png" class="slide-logo"></p>
 <div class="footer footer-default">

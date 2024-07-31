@@ -2,7 +2,7 @@
 title: "Tackling The Reproducibility Crisis In Ecology"
 subtitle: "ESA Annual Meeting 2024"
 author: "Peter Levy, UK Centre for Ecology & Hydrology"
-date: "</br> `r Sys.Date()`"
+date: "</br> '2024-08-07'"
 format:
   revealjs:
     theme: [default, ceh.scss]  
@@ -25,6 +25,13 @@ system.time(quarto_render("./index.qmd"))
 library(data.table)
 library(ggplot2)
 ```
+
+## The real purpose of scientific method
+
+*"... is to make sure Nature hasn't misled you into thinking you know something you don't actually know."*
+
+Robert Pirsig, 1974
+
 ## The Reproducibility Crisis
 1. What it means
 2. The cause - high "false discovery" rates
@@ -39,20 +46,9 @@ library(ggplot2)
 ::: {.column width="40%"}
 
 
-"Reproducibility" of results, not methods.
-:::
-:::
-
-## The Reproducibility Crisis
-::: columns
-::: {.column width="60%"}
-![\label{fig:Ioannidis2005} https://doi.org/10.1371/journal.pmed.0020124](images/Ioannidis2005.png)
-:::
-
-::: {.column width="40%"}
-*"The real purpose of scientific method is to make sure Nature hasn't misled you into thinking you know something you don't actually know."*
-
-Robert Pirsig
+"Reproducibility"<br />
+of [results]{style="color:red"},<br />
+not methods.
 :::
 :::
 
@@ -62,7 +58,7 @@ Robert Pirsig
 library(magrittr)
 library(dplyr)
 library(ggplot2)
-
+set.seed(456)
 y <- rnorm(10000, 0, 33)
 # hist(y)
 cutoff <- quantile(y, probs = 0.95)
@@ -71,14 +67,27 @@ df_dens <- density(y, from = -100, to = 100) %$%
   data.frame(x = x, y = y) %>% 
   mutate(area = x >= cutoff)
 names(df_dens) <- c("Effect_size", "Frequency", "Published")
-p <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
+p_dark <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
   geom_ribbon() +
   scale_fill_manual(values = c("dark grey", "yellow")) +
   geom_line(aes(y = Frequency)) +
   geom_vline(xintercept = cutoff, colour = "red") +
   annotate(geom = 'text', x = cutoff, y = 0.0125, colour = "red", label = 'Significant at p=5%', hjust = -0.1)
-print(p)
+print(p_dark)
+
+# remove the significance level criterion
+cutoff <- quantile(y, probs = 0.001)
+
+df_dens <- density(y, from = -100, to = 100) %$% 
+  data.frame(x = x, y = y) %>% 
+  mutate(area = x >= cutoff)
+names(df_dens) <- c("Effect_size", "Frequency", "Published")
+p_light <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
+  geom_ribbon() +
+  scale_fill_manual(values = c("dark grey", "yellow")) +
+  geom_line(aes(y = Frequency))
 ```
+
 We can only see 5% of the universe.
 
 <!--- {reproducibility crisis -->
@@ -157,6 +166,20 @@ p <- p + scale_color_discrete(name = "Power")
 #p <- p + facet_wrap(~ power, ncol = 1)
 p
 ```
+
+## The ASA statement
+::: columns
+::: {.column width="50%"}
+![](images/Wasserstein.png)
+
+2016
+:::
+::: {.column width="50%"}
+![](images/Wasserstein2.png)
+2019
+:::
+:::
+ Stop using *p* values and "statistical significance".
 
 # An ecological example: soil carbon change {background="#37a635"}
 
@@ -249,22 +272,34 @@ It gets worse.
 
 ## Results
 Plot of FDR for typical experiments with typical power and bias
-Bias is the killer
+-Bias is the killer
 
-## The ASA statement
-::: columns
-::: {.column width="50%"}
-![](images/Wasserstein.png)
+# Solutions {background="#37a635"}
 
-2016
-:::
-::: {.column width="50%"}
-![](images/Wasserstein2.png)
-2019
-:::
-:::
- Stop using *p* values and "statistical significance".
+## A Copernican Revolution {background-color="white" background-video="images/copernican_revolution.mp4"}
 
+## A Copernican Revolution {background-color="white" background-image="images/copernican_revolution.png"}
+
+## What does this mean in practice? {background="#43464B" background-image="images/milky-way.jpeg"}
+```{r darkmatter2}
+print(p_dark)
+```
+
+Don't focus on testing a null hypothesis.
+
+## What does this mean in practice? {background="#43464B" background-image="images/milky-way.jpeg"}
+```{r darkmatter3}
+print(p_light)
+```
+Characterise the model parameter posterior distribution.
+
+## Soil carbon change
+- model the OP
+- provide the posterior distribution
+    - [change | data, $\theta_{OP}$]
+- monetize the change accounting for uncertainty
+
+# Final Thoughts {background="#37a635"}
 ## 
 ::: columns
 ::: {.column width="50%"}
@@ -296,5 +331,3 @@ Patterson & Gimlin, 1967
 ![](images/bigfoot.jpg)
 :::
 :::
-
-## A Copernican Revolution {background-color="white" background-video="images/copernican_revolution.mp4"}
