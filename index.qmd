@@ -3,6 +3,7 @@ title: "Tackling The Reproducibility Crisis In Ecology"
 subtitle: "ESA Annual Meeting 2024"
 author: "Peter Levy, UK Centre for Ecology & Hydrology"
 date: "</br> '2024-08-07'"
+footer: "[peterlevy.github.io/reproducibility_esa](https://peterlevy.github.io/reproducibility_esa/)"
 format:
   revealjs:
     theme: [default, ceh.scss]
@@ -24,14 +25,16 @@ system.time(quarto_render("./index.qmd"))
 ```
 
 ```{r startup}
+here::i_am("index.qmd")
+library(here)
 library(data.table)
 library(ggplot2)
 ```
 
 ## The Reproducibility Crisis
 1. What is it?
-2. Causes: the publishing filter
 3. Causes: high "false discovery" rates
+2. Causes: [the publishing filter]{style="color:grey"}
 4. Ecological examples
 5. Solutions: a change in perspective in statistical thinking
 
@@ -49,44 +52,6 @@ not methods.
 :::
 :::
 
-## Unpublished work as Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
-
-```{r darkmatter}
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-set.seed(456)
-y <- rnorm(10000, 0, 33)
-# hist(y)
-cutoff <- quantile(y, probs = 0.95)
-
-df_dens <- density(y, from = -100, to = 100) %$%
-  data.frame(x = x, y = y) %>%
-  mutate(area = x >= cutoff)
-names(df_dens) <- c("Effect_size", "Frequency", "Published")
-p_dark <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
-  geom_ribbon() +
-  scale_fill_manual(values = c("dark grey", "yellow")) +
-  geom_line(aes(y = Frequency)) +
-  geom_vline(xintercept = cutoff, colour = "red") +
-  annotate(geom = 'text', x = cutoff, y = 0.0125, colour = "red", label = 'Significant at p=5%', hjust = -0.1)
-print(p_dark)
-
-# remove the significance level criterion
-cutoff <- quantile(y, probs = 0.001)
-
-df_dens <- density(y, from = -100, to = 100) %$%
-  data.frame(x = x, y = y) %>%
-  mutate(area = x >= cutoff)
-names(df_dens) <- c("Effect_size", "Frequency", "Published")
-p_light <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
-  geom_ribbon() +
-  scale_fill_manual(values = c("dark grey", "yellow")) +
-  geom_line(aes(y = Frequency))
-```
-
-We can only see 5% of the universe.
-
 <!--- {reproducibility crisis -->
 ## *"Why most published research findings are false"*
 
@@ -98,18 +63,22 @@ We can only see 5% of the universe.
 
 <!--- } -->
 
-# Understanding false discovery rates {background="#37a635"}
+# False discovery rates in ecology {background="#37a635"}
 
-## Disease testing
+## Low prior prob. - disease testing
 ![](images/false_discovery_covid.png)
 
-## Generic experiments
-![](images/false_discovery_expt_1.png)
+## {background-image="images/Slide2.jpg"  background-size=contain}
 
-## Generic experiments
-![](images/false_discovery_expt_2.png)
+## 1. Land use change from EO
+![](images/false_discovery_luc.png)
 
-## Effect of prior probability
+## {background-image="images/Slide4.jpg"  background-size=contain}
+
+## 2. Low statistical power
+![](images/false_discovery_power.png)
+
+## 2. Effect of low power
 ```{r plotfdr}
 alpha <- 0.05
 v_power <- c(0.2, 0.4, 0.8)
@@ -134,13 +103,8 @@ p <- p + geom_line() + ylim(0, 100)
 p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
 # add legend title
 p <- p + scale_color_discrete(name = "Power")
-p
 ```
 
-## Generic experiments: low power
-![](images/false_discovery_expt_3.png)
-
-## Effect of low power
 ```{r lowpower}
 p <- ggplot(dt, aes(prior, fdr*100, colour = as.factor(power), group = power))
 p <- p + geom_line() + ylim(0, 100)
@@ -150,10 +114,32 @@ p <- p + scale_color_discrete(name = "Power")
 p
 ```
 
-## Generic experiments: bias
-![](images/false_discovery_expt_4.png)
+## 2. Low power in ecology
+Measurements are a proxy for true process of interest.
+Connection between the two can be:
 
-## Effect of bias
+- sample from population (sampling error)
+- imperfect measurements (measurement error)
+- proxy variables
+    - true variable is hard to measure but can be approximated
+
+## 2. N$_2$O gas emissions from soil
+![](images/measuringN2O_1.png){width=80%}
+
+## 2. Spatial variation in N$_2$O emissions
+![](images/Crichton_Fn2o_interpolated_June2014_ggmap.png){width=90%}
+
+## 2. We need cumulative emissions
+![](images/measuringN2O_2.png){width=80%}
+
+## 3. Bias in observation process
+![](images/false_discovery_bias.png)
+
+## 3. Bias in observation process
+![](images/even_procedure_cv.png)
+![](images/even_labs.png)
+
+## 3. Effect of bias
 ```{r bias}
 p <- ggplot(dt[prior == 0.5], aes(u, fdr_u*100, colour = as.factor(power), group = power))
 p <- p + geom_line() + ylim(0, 100) + xlim(0, 1)
@@ -179,163 +165,42 @@ p
 
 # An ecological example: soil carbon change {background="#37a635"}
 
-## "Nature-based solutions" to climate change
-
-::: columns
-::: {.column width="40%"}
-- "rejuvenative farming"
-- biochar
-- reduced stocking
-- rewilding
-:::
-
-::: {.column width="60%"}
-![](images/soc_activities.png){.border .border-thick}
-:::
-:::
-
-## "Nature-based solutions" to climate change
-
-::: columns
-::: {.column width="50%"}
-Barley
-![](images/barley.jpg){.border .border-thick}
-:::
-::: {.column width="50%"}
-*Miscanthus*
-![](images/miscanthus.jpg){.border .border-thick}
-:::
-:::
-
-## Measuring soil carbon: field
-![](images/soil_coring_1.png)
-![](images/soil_coring_2.png)
-Take soil cores
-![](images/soil_core.png)
-
-## Measuring soil carbon: lab
-![](images/measuring_LOI.png)
-
-## Soil carbon: integrate over depth
-
-::: columns
-::: {.column width="70%"}
-![](images/soil_C_with_depth.png)
-:::
-
-::: {.column width="30%"}
-$\mathrm{log} C = \alpha + \beta \times \mathrm{depth}$
-:::
-:::
-
-## Soil carbon: integrate over space
-
-![](images/EC_SoilC_maps_eachYear.png)
-
-
-## Soil carbon: uncertainties
-
->- We would typically say we have "measurements of soil carbon".
->- But we actually have measurements of weight loss
->- from a sample of a sample ...
->- from which we predict carbon fraction with a model ...
->- and predict carbon stock to depth with a model ...
->- and extrapolate this in space with a model ...
->- and we (usually) ignore most of the uncertainties!
-
-## Soil carbon: uncertainties
-
-Systematic uncertainties (bias) from different:
-
-- surveyors
-- sampling protocols
-- areas & depths sampled
-- labs & instruments
-- lab protocols
-
-Very hard to be consistent over >10 years.
-
-## Results - low power and bias
-```{r fdrsoilc}
-source("R/false_discovery_rate.R")
-n_sims <- 20000
-mu_t1 <- 15
-sigma_s <- 1.5
-d_true  <- mu_t1 * 0.05
-v_n    <- c(5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 80, 100)
-# plot(v_n, v_fdr)
-# calc_fdr(n = 9, mu_t1 = mu_t1, d_true = 0.75, sigma_s = sigma_s, sigma_b = 0, n_sims = 1000)
-v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 0, n_sims = n_sims)
-dt_b0 <- data.table(n = v_n, fdr = v_fdr, bias = 0)
-v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 0.5, n_sims = n_sims)
-dt_b1 <- data.table(n = v_n, fdr = v_fdr, bias = 0.5)
-v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 1.0, n_sims = n_sims)
-dt_b2 <- data.table(n = v_n, fdr = v_fdr, bias = 1.0)
-dt <- rbind(dt_b0, dt_b1, dt_b2)
-
-p <- ggplot(dt, aes(n, fdr*100, color = as.factor(bias)))
-p <- p + geom_line(linewidth = 1) + ylim(0, 70)
-p <- p + geom_vline(xintercept = 9, linetype = "dashed", colour = "black")
-p <- p + xlab("Number of samples") + ylab("False Discovery Rate (%)")
-# add legend title
-p <- p + scale_color_discrete(name = "Bias")
-p
-```
-
-Prior probability of 0.5
-
-## Results - low prior probability
-
-```{r fdrsoilc2}
-P_H1 <- 0.3
-v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 0, P_H1 = P_H1, n_sims = n_sims)
-dt_b0 <- data.table(n = v_n, fdr = v_fdr, bias = 0)
-v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 0.5, P_H1 = P_H1, n_sims = n_sims)
-dt_b1 <- data.table(n = v_n, fdr = v_fdr, bias = 0.5)
-v_fdr <- sapply(v_n, calc_fdr, mu_t1 = mu_t1, d_true = d_true, sigma_s = sigma_s, sigma_b = 1.0, P_H1 = P_H1, n_sims = n_sims)
-dt_b2 <- data.table(n = v_n, fdr = v_fdr, bias = 1.0)
-dt <- rbind(dt_b0, dt_b1, dt_b2)
-
-p <- ggplot(dt, aes(n, fdr*100, color = as.factor(bias)))
-p <- p + geom_line(linewidth = 1) + ylim(0, 70)
-p <- p + geom_vline(xintercept = 9, linetype = "dashed", colour = "black")
-p <- p + xlab("Number of samples") + ylab("False Discovery Rate (%)")
-# add legend title
-p <- p + scale_color_discrete(name = "Bias")
-p
-```
-
-Prior probability of 0.3
-
 # Solutions {background="#37a635"}
 
 ## A Copernican Revolution {background-color="white" background-video="images/copernican_revolution.mp4"}
 
 ## A Copernican Revolution {background-color="white" background-image="images/copernican_revolution.png"}
 
-## What does this mean in practice? {background="#43464B" background-image="images/milky-way.jpeg"}
-```{r darkmatter2}
-print(p_dark)
-```
+# Low prior probability e.g. LUC {background="#37a635"}
+## {background-image="images/Slide8.jpg"  background-size=contain}
+## {background-image="images/Slide9.jpg"  background-size=contain}
+## {background-image="images/Slide10.jpg"  background-size=contain}
+## {background-image="images/Slide15.jpg"  background-size=contain}
 
-Don't focus on testing a null hypothesis.
+# Low power e.g. gas emissions {background="#37a635"}
+## Low power e.g. gas emissions
+Monte carlo simulation example
 
-## What does this mean in practice? {background="#43464B" background-image="images/milky-way.jpeg"}
-```{r darkmatter3}
-print(p_light)
-```
-Characterise the model parameter posterior distribution.
+## Low power e.g. gas emissions
+... estimating the difference in volume under two surfaces:
+![](images/time_space_3D_with_points.png){width=45%}
+![](images/time_space_3D_with_points_2.png){width=45%}
 
+## Low power e.g. gas emissions
+- Propagation of uncertainty via Monte Carlo simulation
+    - repeatedly draw samples from given distributions
+    - calculate time series of fluxes and accumulate
+    - gives the possible distribution of ccumulative emission given data
+- Bayesian approach to data analysis
+    - propagation of uncertainty is "built in"
+
+# Bias in observation process e.g. soil carbon {background="#37a635"}
 
 ## Soil carbon change
 - model the OP
 - provide the posterior distribution
 - [change | data, $\theta_{OP}$]
 - monetize the change, accounting for uncertainty
-
-## Slides online
-
-[https://peterlevy.github.io/reproducibility_esa](https://peterlevy.github.io/reproducibility_esa)
 
 # Final Thoughts {background="#37a635"}
 
@@ -377,3 +242,57 @@ Patterson & Gimlin, 1967
 ![](images/bigfoot.jpg)
 :::
 :::
+
+
+# The publishing filter {background="#37a635"}
+
+## Unpublished work as Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
+
+```{r darkmatter}
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+set.seed(456)
+y <- rnorm(10000, 0, 33)
+# hist(y)
+cutoff <- quantile(y, probs = 0.95)
+
+df_dens <- density(y, from = -100, to = 100) %$%
+  data.frame(x = x, y = y) %>%
+  mutate(area = x >= cutoff)
+names(df_dens) <- c("Effect_size", "Frequency", "Published")
+p_dark <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
+  geom_ribbon() +
+  scale_fill_manual(values = c("dark grey", "yellow")) +
+  geom_line(aes(y = Frequency)) +
+  geom_vline(xintercept = cutoff, colour = "red") +
+  annotate(geom = 'text', x = cutoff, y = 0.0125, colour = "red", label = 'Significant at p=5%', hjust = -0.1)
+print(p_dark)
+
+# remove the significance level criterion
+cutoff <- quantile(y, probs = 0.001)
+
+df_dens <- density(y, from = -100, to = 100) %$%
+  data.frame(x = x, y = y) %>%
+  mutate(area = x >= cutoff)
+names(df_dens) <- c("Effect_size", "Frequency", "Published")
+p_light <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
+  geom_ribbon() +
+  scale_fill_manual(values = c("dark grey", "yellow")) +
+  geom_line(aes(y = Frequency))
+```
+
+We can only see 5% of the universe.
+
+## What does this mean in practice? {background="#43464B" background-image="images/milky-way.jpeg"}
+```{r darkmatter2}
+print(p_dark)
+```
+
+Don't focus on testing a null hypothesis.
+
+## What does this mean in practice? {background="#43464B" background-image="images/milky-way.jpeg"}
+```{r darkmatter3}
+print(p_light)
+```
+Characterise the model parameter posterior distribution.

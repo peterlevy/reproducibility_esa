@@ -346,8 +346,8 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <h2>The Reproducibility Crisis</h2>
 <ol type="1">
 <li>What is it?</li>
-<li>Causes: the publishing filter</li>
 <li>Causes: high “false discovery” rates</li>
+<li>Causes: <span style="color:grey">the publishing filter</span></li>
 <li>Ecological examples</li>
 <li>Solutions: a change in perspective in statistical thinking</li>
 </ol>
@@ -366,11 +366,6 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <p>“Reproducibility”<br> of <span style="color:red">results</span>,<br> not methods.</p>
 </div>
 </div>
-</section>
-<section id="unpublished-work-as-dark-matter" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
-<h2>Unpublished work as Dark Matter</h2>
-
-<img data-src="index_files/figure-revealjs/darkmatter-1.png" width="960" class="r-stretch"><p>We can only see 5% of the universe.</p>
 <!--- {reproducibility crisis -->
 </section>
 <section id="why-most-published-research-findings-are-false" class="slide level2">
@@ -384,40 +379,66 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <!--- } -->
 </section>
 <section>
-<section id="understanding-false-discovery-rates" class="title-slide slide level1 center" data-background="#37a635">
-<h1>Understanding false discovery rates</h1>
+<section id="false-discovery-rates-in-ecology" class="title-slide slide level1 center" data-background="#37a635">
+<h1>False discovery rates in ecology</h1>
 
 </section>
-<section id="disease-testing" class="slide level2">
-<h2>Disease testing</h2>
+<section id="low-prior-prob.---disease-testing" class="slide level2">
+<h2>Low prior prob. - disease testing</h2>
 
 <img data-src="images/false_discovery_covid.png" class="r-stretch"></section>
-<section id="generic-experiments" class="slide level2">
-<h2>Generic experiments</h2>
+<section id="section" class="slide level2" data-background-image="images/Slide2.jpg" data-background-size="contain">
+<h2></h2>
+</section>
+<section id="land-use-change-from-eo" class="slide level2">
+<h2>1. Land use change from EO</h2>
 
-<img data-src="images/false_discovery_expt_1.png" class="r-stretch"></section>
-<section id="generic-experiments-1" class="slide level2">
-<h2>Generic experiments</h2>
+<img data-src="images/false_discovery_luc.png" class="r-stretch"></section>
+<section id="section-1" class="slide level2" data-background-image="images/Slide4.jpg" data-background-size="contain">
+<h2></h2>
+</section>
+<section id="low-statistical-power" class="slide level2">
+<h2>2. Low statistical power</h2>
 
-<img data-src="images/false_discovery_expt_2.png" class="r-stretch"></section>
-<section id="effect-of-prior-probability" class="slide level2">
-<h2>Effect of prior probability</h2>
-
-<img data-src="index_files/figure-revealjs/plotfdr-1.png" width="960" class="r-stretch"></section>
-<section id="generic-experiments-low-power" class="slide level2">
-<h2>Generic experiments: low power</h2>
-
-<img data-src="images/false_discovery_expt_3.png" class="r-stretch"></section>
+<img data-src="images/false_discovery_power.png" class="r-stretch"></section>
 <section id="effect-of-low-power" class="slide level2">
-<h2>Effect of low power</h2>
+<h2>2. Effect of low power</h2>
 
 <img data-src="index_files/figure-revealjs/lowpower-1.png" width="960" class="r-stretch"></section>
-<section id="generic-experiments-bias" class="slide level2">
-<h2>Generic experiments: bias</h2>
+<section id="low-power-in-ecology" class="slide level2">
+<h2>2. Low power in ecology</h2>
+<p>Measurements are a proxy for true process of interest. Connection between the two can be:</p>
+<ul>
+<li>sample from population (sampling error)</li>
+<li>imperfect measurements (measurement error)</li>
+<li>proxy variables
+<ul>
+<li>true variable is hard to measure but can be approximated</li>
+</ul></li>
+</ul>
+</section>
+<section id="n_2o-gas-emissions-from-soil" class="slide level2">
+<h2>2. N<span class="math inline">\(_2\)</span>O gas emissions from soil</h2>
 
-<img data-src="images/false_discovery_expt_4.png" class="r-stretch"></section>
+<img data-src="images/measuringN2O_1.png" style="width:80.0%" class="r-stretch"></section>
+<section id="spatial-variation-in-n_2o-emissions" class="slide level2">
+<h2>2. Spatial variation in N<span class="math inline">\(_2\)</span>O emissions</h2>
+
+<img data-src="images/Crichton_Fn2o_interpolated_June2014_ggmap.png" style="width:90.0%" class="r-stretch"></section>
+<section id="we-need-cumulative-emissions" class="slide level2">
+<h2>2. We need cumulative emissions</h2>
+
+<img data-src="images/measuringN2O_2.png" style="width:80.0%" class="r-stretch"></section>
+<section id="bias-in-observation-process" class="slide level2">
+<h2>3. Bias in observation process</h2>
+
+<img data-src="images/false_discovery_bias.png" class="r-stretch"></section>
+<section id="bias-in-observation-process-1" class="slide level2">
+<h2>3. Bias in observation process</h2>
+<p><img data-src="images/even_procedure_cv.png"> <img data-src="images/even_labs.png"></p>
+</section>
 <section id="effect-of-bias" class="slide level2">
-<h2>Effect of bias</h2>
+<h2>3. Effect of bias</h2>
 
 <img data-src="index_files/figure-revealjs/bias-1.png" width="960" class="r-stretch"></section>
 <section id="the-asa-statement" class="slide level2">
@@ -432,92 +453,11 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </div>
 <p>Stop using <em>p</em> values and “statistical significance”.</p>
 </section></section>
-<section>
 <section id="an-ecological-example-soil-carbon-change" class="title-slide slide level1 center" data-background="#37a635">
 <h1>An ecological example: soil carbon change</h1>
 
 </section>
-<section id="nature-based-solutions-to-climate-change" class="slide level2">
-<h2>“Nature-based solutions” to climate change</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>“rejuvenative farming”</li>
-<li>biochar</li>
-<li>reduced stocking</li>
-<li>rewilding</li>
-</ul>
-</div><div class="column" style="width:60%;">
-<p><img data-src="images/soc_activities.png" class="border border-thick"></p>
-</div>
-</div>
-</section>
-<section id="nature-based-solutions-to-climate-change-1" class="slide level2">
-<h2>“Nature-based solutions” to climate change</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Barley <img data-src="images/barley.jpg" class="border border-thick"></p>
-</div><div class="column" style="width:50%;">
-<p><em>Miscanthus</em> <img data-src="images/miscanthus.jpg" class="border border-thick"></p>
-</div>
-</div>
-</section>
-<section id="measuring-soil-carbon-field" class="slide level2">
-<h2>Measuring soil carbon: field</h2>
-<p><img data-src="images/soil_coring_1.png"> <img data-src="images/soil_coring_2.png"> Take soil cores <img data-src="images/soil_core.png"></p>
-</section>
-<section id="measuring-soil-carbon-lab" class="slide level2">
-<h2>Measuring soil carbon: lab</h2>
 
-<img data-src="images/measuring_LOI.png" class="r-stretch"></section>
-<section id="soil-carbon-integrate-over-depth" class="slide level2">
-<h2>Soil carbon: integrate over depth</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<p><img data-src="images/soil_C_with_depth.png"></p>
-</div><div class="column" style="width:30%;">
-<p><span class="math inline">\(\mathrm{log} C = \alpha + \beta \times \mathrm{depth}\)</span></p>
-</div>
-</div>
-</section>
-<section id="soil-carbon-integrate-over-space" class="slide level2">
-<h2>Soil carbon: integrate over space</h2>
-
-<img data-src="images/EC_SoilC_maps_eachYear.png" class="r-stretch"></section>
-<section id="soil-carbon-uncertainties" class="slide level2">
-<h2>Soil carbon: uncertainties</h2>
-<ul>
-<li class="fragment">We would typically say we have “measurements of soil carbon”.</li>
-<li class="fragment">But we actually have measurements of weight loss</li>
-<li class="fragment">from a sample of a sample …</li>
-<li class="fragment">from which we predict carbon fraction with a model …</li>
-<li class="fragment">and predict carbon stock to depth with a model …</li>
-<li class="fragment">and extrapolate this in space with a model …</li>
-<li class="fragment">and we (usually) ignore most of the uncertainties!</li>
-</ul>
-</section>
-<section id="soil-carbon-uncertainties-1" class="slide level2">
-<h2>Soil carbon: uncertainties</h2>
-<p>Systematic uncertainties (bias) from different:</p>
-<ul>
-<li>surveyors</li>
-<li>sampling protocols</li>
-<li>areas &amp; depths sampled</li>
-<li>labs &amp; instruments</li>
-<li>lab protocols</li>
-</ul>
-<p>Very hard to be consistent over &gt;10 years.</p>
-</section>
-<section id="results---low-power-and-bias" class="slide level2">
-<h2>Results - low power and bias</h2>
-
-<img data-src="index_files/figure-revealjs/fdrsoilc-1.png" width="960" class="r-stretch"><p>Prior probability of 0.5</p>
-</section>
-<section id="results---low-prior-probability" class="slide level2">
-<h2>Results - low prior probability</h2>
-
-<img data-src="index_files/figure-revealjs/fdrsoilc2-1.png" width="960" class="r-stretch"><p>Prior probability of 0.3</p>
-</section></section>
 <section>
 <section id="solutions" class="title-slide slide level1 center" data-background="#37a635">
 <h1>Solutions</h1>
@@ -528,16 +468,56 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </section>
 <section id="a-copernican-revolution-1" class="slide level2" data-background-color="white" data-background-image="images/copernican_revolution.png">
 <h2>A Copernican Revolution</h2>
-</section>
-<section id="what-does-this-mean-in-practice" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
-<h2>What does this mean in practice?</h2>
+</section></section>
+<section>
+<section id="low-prior-probability-e.g.-luc" class="title-slide slide level1 center" data-background="#37a635">
+<h1>Low prior probability e.g.&nbsp;LUC</h1>
 
-<img data-src="index_files/figure-revealjs/darkmatter2-1.png" width="960" class="r-stretch"><p>Don’t focus on testing a null hypothesis.</p>
 </section>
-<section id="what-does-this-mean-in-practice-1" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
-<h2>What does this mean in practice?</h2>
+<section id="section-2" class="slide level2" data-background-image="images/Slide8.jpg" data-background-size="contain">
+<h2></h2>
+</section>
+<section id="section-3" class="slide level2" data-background-image="images/Slide9.jpg" data-background-size="contain">
+<h2></h2>
+</section>
+<section id="section-4" class="slide level2" data-background-image="images/Slide10.jpg" data-background-size="contain">
+<h2></h2>
+</section>
+<section id="section-5" class="slide level2" data-background-image="images/Slide15.jpg" data-background-size="contain">
+<h2></h2>
+</section></section>
+<section>
+<section id="low-power-e.g.-gas-emissions" class="title-slide slide level1 center" data-background="#37a635">
+<h1>Low power e.g.&nbsp;gas emissions</h1>
 
-<img data-src="index_files/figure-revealjs/darkmatter3-1.png" width="960" class="r-stretch"><p>Characterise the model parameter posterior distribution.</p>
+</section>
+<section id="low-power-e.g.-gas-emissions-1" class="slide level2">
+<h2>Low power e.g.&nbsp;gas emissions</h2>
+<p>Monte carlo simulation example</p>
+</section>
+<section id="low-power-e.g.-gas-emissions-2" class="slide level2">
+<h2>Low power e.g.&nbsp;gas emissions</h2>
+<p>… estimating the difference in volume under two surfaces: <img data-src="images/time_space_3D_with_points.png" style="width:45.0%"> <img data-src="images/time_space_3D_with_points_2.png" style="width:45.0%"></p>
+</section>
+<section id="low-power-e.g.-gas-emissions-3" class="slide level2">
+<h2>Low power e.g.&nbsp;gas emissions</h2>
+<ul>
+<li>Propagation of uncertainty via Monte Carlo simulation
+<ul>
+<li>repeatedly draw samples from given distributions</li>
+<li>calculate time series of fluxes and accumulate</li>
+<li>gives the possible distribution of ccumulative emission given data</li>
+</ul></li>
+<li>Bayesian approach to data analysis
+<ul>
+<li>propagation of uncertainty is “built in”</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="bias-in-observation-process-e.g.-soil-carbon" class="title-slide slide level1 center" data-background="#37a635">
+<h1>Bias in observation process e.g.&nbsp;soil carbon</h1>
+
 </section>
 <section id="soil-carbon-change" class="slide level2">
 <h2>Soil carbon change</h2>
@@ -547,10 +527,6 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <li>[change | data, <span class="math inline">\(\theta_{OP}\)</span>]</li>
 <li>monetize the change, accounting for uncertainty</li>
 </ul>
-</section>
-<section id="slides-online" class="slide level2">
-<h2>Slides online</h2>
-<p><a href="https://peterlevy.github.io/reproducibility_esa">https://peterlevy.github.io/reproducibility_esa</a></p>
 </section></section>
 <section>
 <section id="final-thoughts" class="title-slide slide level1 center" data-background="#37a635">
@@ -562,7 +538,7 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <p><em>“… is to make sure Nature hasn’t misled you into thinking you know something you don’t actually know.”</em></p>
 <p>Robert Pirsig, 1974</p>
 </section>
-<section id="section" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -574,7 +550,7 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </div>
 </div>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -587,10 +563,38 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <p><img data-src="images/bigfoot.jpg"></p>
 </div>
 </div>
+</section></section>
+<section>
+<section id="the-publishing-filter" class="title-slide slide level1 center" data-background="#37a635">
+<h1>The publishing filter</h1>
+
+</section>
+<section id="unpublished-work-as-dark-matter" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
+<h2>Unpublished work as Dark Matter</h2>
+
+<img data-src="index_files/figure-revealjs/darkmatter-1.png" width="960" class="r-stretch"><p>We can only see 5% of the universe.</p>
+</section>
+<section id="what-does-this-mean-in-practice" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
+<h2>What does this mean in practice?</h2>
+
+<img data-src="index_files/figure-revealjs/darkmatter2-1.png" width="960" class="r-stretch"><p>Don’t focus on testing a null hypothesis.</p>
+</section>
+<section id="what-does-this-mean-in-practice-1" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
+<h2>What does this mean in practice?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/darkmatter3-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Characterise the model parameter posterior distribution.</p>
 <div class="quarto-auto-generated-content">
 <p><img src="images/logo/UKCEH-Logo_Short_Positive_RGB.png" class="slide-logo"></p>
 <div class="footer footer-default">
-
+<p><a href="https://peterlevy.github.io/reproducibility_esa/">peterlevy.github.io/reproducibility_esa</a></p>
 </div>
 </div>
 </section></section>
