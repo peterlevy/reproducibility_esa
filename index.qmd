@@ -29,11 +29,11 @@ library(ggplot2)
 ```
 
 ## The Reproducibility Crisis
-1. The causes:
-- the publishing filter
-- high "false discovery" rates
-3. An ecological example: soil carbon change
-4. Solutions: a change in perspective in statistical thinking
+1. What is it?
+2. Causes: the publishing filter
+3. Causes: high "false discovery" rates
+4. Ecological examples
+5. Solutions: a change in perspective in statistical thinking
 
 ## The Reproducibility Crisis
 ::: columns
@@ -90,13 +90,12 @@ We can only see 5% of the universe.
 <!--- {reproducibility crisis -->
 ## *"Why most published research findings are false"*
 
-High "false discovery rates", often much higher than 5 %
+- Low prior probabilities - unlikely / rare effects
+- Low statistical power - low signal:noise
+- Bias - systematic uncertainties in observation process
 
-because of:
+-> High "false discovery rates", often much higher than 5 %
 
-- low prior $P(\mathrm{effect})$ - unlikely / rare effects
-- low statistical power - low signal:noise
-- bias - systematic uncertainty
 <!--- } -->
 
 # Understanding false discovery rates {background="#37a635"}
@@ -333,6 +332,10 @@ Characterise the model parameter posterior distribution.
 - provide the posterior distribution
 - [change | data, $\theta_{OP}$]
 - monetize the change, accounting for uncertainty
+
+## Slides online
+
+[https://peterlevy.github.io/reproducibility_esa](https://peterlevy.github.io/reproducibility_esa)
 
 # Final Thoughts {background="#37a635"}
 
