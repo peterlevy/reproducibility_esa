@@ -29,6 +29,7 @@ here::i_am("index.qmd")
 library(here)
 library(data.table)
 library(ggplot2)
+library(caTools)
 ```
 
 ## The Reproducibility Crisis
@@ -46,8 +47,8 @@ library(ggplot2)
 ::: {.column width="40%"}
 
 
-"Reproducibility"<br />
-of [results]{style="color:red"},<br />
+"Reproducibility"<br/>
+of [results]{style="color:red"},<br/>
 not methods.
 :::
 :::
@@ -65,7 +66,7 @@ not methods.
 
 # False discovery rates in ecology {background="#37a635"}
 
-## Low prior prob. - disease testing
+## 1. Low prior prob: disease testing
 ![](images/false_discovery_covid.png)
 
 ## {background-image="images/Slide2.jpg"  background-size=contain}
@@ -163,21 +164,27 @@ p
 :::
  Stop using *p* values and "statistical significance".
 
-# An ecological example: soil carbon change {background="#37a635"}
-
 # Solutions {background="#37a635"}
 
 ## A Copernican Revolution {background-color="white" background-video="images/copernican_revolution.mp4"}
 
 ## A Copernican Revolution {background-color="white" background-image="images/copernican_revolution.png"}
 
-# Low prior probability e.g. LUC {background="#37a635"}
+## In practice
+- don't take data at face value
+- represent & propagate their uncertainties
+- represent potential biases
+- often goes beyond off-the-shelf stats model
+- suits Monte Carlo or fully Bayesian approach
+- examples ...
+
+# 1. Low prior probability of Land-Use Change {background="#37a635"}
 ## {background-image="images/Slide8.jpg"  background-size=contain}
 ## {background-image="images/Slide9.jpg"  background-size=contain}
 ## {background-image="images/Slide10.jpg"  background-size=contain}
 ## {background-image="images/Slide15.jpg"  background-size=contain}
 
-# Low power e.g. gas emissions {background="#37a635"}
+# 2. Low statistical power in N$_2$O gas emissions {background="#37a635"}
 ## Low power e.g. gas emissions
 Monte carlo simulation example
 
@@ -194,7 +201,7 @@ Monte carlo simulation example
 - Bayesian approach to data analysis
     - propagation of uncertainty is "built in"
 
-# Bias in observation process e.g. soil carbon {background="#37a635"}
+# 3. Bias in soil carbon measurement {background="#37a635"}
 
 ## Soil carbon change
 - model the OP
