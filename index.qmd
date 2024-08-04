@@ -32,46 +32,122 @@ library(ggplot2)
 library(caTools)
 ```
 
-## The Reproducibility Crisis
-1. What is it?
+## Outline
+1. The Reproducibility Crisis - what is it?
+2. Causes: the information architecture of science
 3. Causes: high "false discovery" rates
-2. Causes: [the publishing filter]{style="color:grey"}
 4. Ecological examples
 5. Solutions: a change in perspective in statistical thinking
 
 ## The Reproducibility Crisis
 ::: columns
+::: {.column width="40%"}
+Reproducibility<br/>
+of [results]{style="color:red"},<br/>
+not methods.
+<br/><br/>
+Better name:<br/>
+"*Credibility* crisis"?
+:::
 ::: {.column width="60%"}
 ![\label{fig:Ioannidis2005} Ioannidis, 2005, PLOS Medicine](images/Ioannidis2005.png)
 :::
-::: {.column width="40%"}
-
-
-"Reproducibility"<br/>
-of [results]{style="color:red"},<br/>
-not methods.
-:::
 :::
 
-<!--- {reproducibility crisis -->
+# The information architecture of science {background="#37a635"}
+
 ## *"Why most published research findings are false"*
 
-- Low prior probabilities - unlikely / rare effects
-- Low statistical power - low signal:noise
-- Bias - systematic uncertainties in observation process
+::: columns
+::: {.column width="35%"}
+- The multiple testing problem
+- What if we only publish the 5% studies with significant results?
+:::
 
--> High "false discovery rates", often much higher than 5 %
+::: {.column width="65%"}
+![](images/significant2.png)
+:::
+:::
 
-<!--- } -->
+## *"Why most published research findings are false"*
+- "*The garden of forking paths*"
+    - many possible choices in data collection & analysis
+    - choices favour finding *interesting* patterns
+- Motivated cognition
+    - "the influence of motives on memory, information processing & reasoning."
+- Journals reject negative or confirmation results
+
+## Unpublished work as Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
+
+```{r darkmatter}
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+set.seed(456)
+y <- rnorm(10000, 0, 33)
+# hist(y)
+cutoff <- quantile(y, probs = 0.95)
+
+df_dens <- density(y, from = -100, to = 100) %$%
+  data.frame(x = x, y = y) %>%
+  mutate(area = x >= cutoff)
+names(df_dens) <- c("Effect_size", "Frequency", "Published")
+p_dark <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
+  geom_ribbon() +
+  scale_fill_manual(values = c("dark grey", "yellow")) +
+  geom_line(aes(y = Frequency)) +
+  geom_vline(xintercept = cutoff, colour = "red") +
+  annotate(geom = 'text', x = cutoff, y = 0.0125, colour = "red", label = 'Significant at p=5%', hjust = -0.1)
+print(p_dark)
+
+# remove the significance level criterion
+cutoff <- quantile(y, probs = 0.001)
+
+df_dens <- density(y, from = -100, to = 100) %$%
+  data.frame(x = x, y = y) %>%
+  mutate(area = x >= cutoff)
+names(df_dens) <- c("Effect_size", "Frequency", "Published")
+p_light <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
+  geom_ribbon() +
+  scale_fill_manual(values = c("dark grey", "yellow")) +
+  geom_line(aes(y = Frequency))
+```
+
+We can only see 5% of the universe.
+
+## Solutions {background="#43464B" background-image="images/milky-way.jpeg"}
+```{r darkmatter2}
+print(p_dark)
+```
+
+Don't focus on testing a null hypothesis.
+
+## Solutions {background="#43464B" background-image="images/milky-way.jpeg"}
+```{r darkmatter3}
+print(p_light)
+```
+
+Pre-register and publish [all]{style="color:yellow"} results.
+
+<!--- {reproducibility crisis -->
 
 # False discovery rates in ecology {background="#37a635"}
 
-## 1. Low prior prob: disease testing
+## *"Why most published research findings are false"*
+
+1. Low prior probabilities - unlikely / rare effects
+2. Low statistical power - low signal:noise
+3. Bias - systematic uncertainties in observation process
+
+-> High "false discovery rates", often much higher than 5 %
+
+
+## 1. Low prior probabilities
 ![](images/false_discovery_covid.png)
 
 ## {background-image="images/Slide2.jpg"  background-size=contain}
 
-## 1. Land use change from EO
+## Example: Land-use change
 ![](images/false_discovery_luc.png)
 
 ## {background-image="images/Slide4.jpg"  background-size=contain}
@@ -124,21 +200,27 @@ Connection between the two can be:
 - proxy variables
     - true variable is hard to measure but can be approximated
 
-## 2. N$_2$O gas emissions from soil
+## Example: gas emissions from soil
 ![](images/measuringN2O_1.png){width=80%}
 
-## 2. Spatial variation in N$_2$O emissions
+## Spatial variation in gas emissions
 ![](images/Crichton_Fn2o_interpolated_June2014_ggmap.png){width=90%}
 
-## 2. We need cumulative emissions
+## We need cumulative emissions
 ![](images/measuringN2O_2.png){width=80%}
 
 ## 3. Bias in observation process
 ![](images/false_discovery_bias.png)
 
-## 3. Bias in observation process
-![](images/even_procedure_cv.png)
+## Example: soil carbon change
+::: columns
+::: {.column width="70%"}
+![](images/soc_activities.png)
+:::
+::: {.column width="30%"}
 ![](images/even_labs.png)
+:::
+:::
 
 ## 3. Effect of bias
 ```{r bias}
@@ -178,40 +260,39 @@ p
 - suits Monte Carlo or fully Bayesian approach
 - examples ...
 
-# 1. Low prior probability of Land-Use Change {background="#37a635"}
+# Example: Land-Use Change {background="#37a635"}
 ## {background-image="images/Slide8.jpg"  background-size=contain}
 ## {background-image="images/Slide9.jpg"  background-size=contain}
 ## {background-image="images/Slide10.jpg"  background-size=contain}
 ## {background-image="images/Slide15.jpg"  background-size=contain}
 
-# 2. Low statistical power in N$_2$O gas emissions {background="#37a635"}
-## Low power e.g. gas emissions
-Monte carlo simulation example
+# Example: soil gas emissions {background="#37a635"}
+## Example: soil gas emissions
+Propagate the uncertainty in each measurement ...
+![](images/flux_uncertainty.png)
 
-## Low power e.g. gas emissions
-... estimating the difference in volume under two surfaces:
+## Example: soil gas emissions
+... and in the spatio-temporal extrapolation ...
 ![](images/time_space_3D_with_points.png){width=45%}
 ![](images/time_space_3D_with_points_2.png){width=45%}
 
-## Low power e.g. gas emissions
-- Propagation of uncertainty via Monte Carlo simulation
-    - repeatedly draw samples from given distributions
-    - calculate time series of fluxes and accumulate
-    - gives the possible distribution of ccumulative emission given data
-- Bayesian approach to data analysis
-    - propagation of uncertainty is "built in"
+## Example: soil gas emissions
+... to give posterior uncertainty in treatment effects.
+![](images/Sabah_Fn2o_postDensity.png)
 
-# 3. Bias in soil carbon measurement {background="#37a635"}
-
-## Soil carbon change
-- model the OP
-- provide the posterior distribution
-- [change | data, $\theta_{OP}$]
-- monetize the change, accounting for uncertainty
+## Summary {background="#37a635"}
+- Reproducibilty (credibility) crisis arises from:
+    - information architecture i.e. filtering
+    - misuse of null-hypothesis testing
+- In ecology, measurement is difficult & indirect ->
+    - low statistical power
+    - bias in obs process
+- Represent the uncertainty in data & obs process
+- Suggests Bayesian approach
 
 # Final Thoughts {background="#37a635"}
 
-## The real purpose of scientific method
+## The real purpose of science
 
 *"... is to make sure Nature hasn't misled you into thinking you know something you don't actually know."*
 
@@ -249,57 +330,3 @@ Patterson & Gimlin, 1967
 ![](images/bigfoot.jpg)
 :::
 :::
-
-
-# The publishing filter {background="#37a635"}
-
-## Unpublished work as Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
-
-```{r darkmatter}
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-set.seed(456)
-y <- rnorm(10000, 0, 33)
-# hist(y)
-cutoff <- quantile(y, probs = 0.95)
-
-df_dens <- density(y, from = -100, to = 100) %$%
-  data.frame(x = x, y = y) %>%
-  mutate(area = x >= cutoff)
-names(df_dens) <- c("Effect_size", "Frequency", "Published")
-p_dark <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
-  geom_ribbon() +
-  scale_fill_manual(values = c("dark grey", "yellow")) +
-  geom_line(aes(y = Frequency)) +
-  geom_vline(xintercept = cutoff, colour = "red") +
-  annotate(geom = 'text', x = cutoff, y = 0.0125, colour = "red", label = 'Significant at p=5%', hjust = -0.1)
-print(p_dark)
-
-# remove the significance level criterion
-cutoff <- quantile(y, probs = 0.001)
-
-df_dens <- density(y, from = -100, to = 100) %$%
-  data.frame(x = x, y = y) %>%
-  mutate(area = x >= cutoff)
-names(df_dens) <- c("Effect_size", "Frequency", "Published")
-p_light <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
-  geom_ribbon() +
-  scale_fill_manual(values = c("dark grey", "yellow")) +
-  geom_line(aes(y = Frequency))
-```
-
-We can only see 5% of the universe.
-
-## What does this mean in practice? {background="#43464B" background-image="images/milky-way.jpeg"}
-```{r darkmatter2}
-print(p_dark)
-```
-
-Don't focus on testing a null hypothesis.
-
-## What does this mean in practice? {background="#43464B" background-image="images/milky-way.jpeg"}
-```{r darkmatter3}
-print(p_light)
-```
-Characterise the model parameter posterior distribution.
