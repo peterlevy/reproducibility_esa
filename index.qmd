@@ -39,6 +39,10 @@ library(caTools)
 4. Ecological examples
 5. Solutions: a change in perspective in statistical thinking
 
+::: {.notes}
+Speaker notes go here.
+:::
+
 ## The Reproducibility Crisis
 ::: columns
 ::: {.column width="40%"}
@@ -65,7 +69,7 @@ Better name:<br/>
 :::
 
 ::: {.column width="65%"}
-![](images/significant2.png)
+![](images/significant2.png){width="80%"}
 :::
 :::
 
@@ -269,7 +273,7 @@ p
 # Example: soil gas emissions {background="#37a635"}
 ## Example: soil gas emissions
 Propagate the uncertainty in each measurement ...
-![](images/flux_uncertainty.png)
+![](images/flux_uncertainty.png){width=75%}
 
 ## Example: soil gas emissions
 ... and in the spatio-temporal extrapolation ...
@@ -278,7 +282,7 @@ Propagate the uncertainty in each measurement ...
 
 ## Example: soil gas emissions
 ... to give posterior uncertainty in treatment effects.
-![](images/Sabah_Fn2o_postDensity.png)
+![](images/Sabah_Fn2o_postDensity.png){width=50%}
 
 ## Summary {background="#37a635"}
 - Reproducibilty (credibility) crisis arises from:
