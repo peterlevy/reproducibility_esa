@@ -34,13 +34,16 @@ library(caTools)
 
 ## Outline
 1. The Reproducibility Crisis - what is it?
-2. Causes: the information architecture of science
-3. Causes: high "false discovery" rates
-4. Ecological examples
-5. Solutions: a change in perspective in statistical thinking
+2. Causes
+3. Ecological examples
+4. Solutions?
 
 ::: {.notes}
-Speaker notes go here.
+A quick outline of what I'm going to talk about
+
+Two causes - one about how we publish
+
+- one about how we do science & analyse data
 :::
 
 ## The Reproducibility Crisis
@@ -58,19 +61,44 @@ Better name:<br/>
 :::
 :::
 
+::: {.notes}
+Results, not methods
+
+Dates back to a landmark paper with arresting title
+
+Now mainstream view - just what statiticians have said for decades about misinterpreting p values
+
+2 causes
+:::
+
 # The information architecture of science {background="#37a635"}
+
+::: {.notes}
+The cause I give a grandiose name
+
+The process by which info gets from lab/field into the public domain
+:::
 
 ## *"Why most published research findings are false"*
 
 ::: columns
 ::: {.column width="35%"}
 - The multiple testing problem
-- What if we only publish the 5% studies with significant results?
 :::
 
 ::: {.column width="65%"}
 ![](images/significant2.png){width="80%"}
 :::
+:::
+
+::: {.notes}
+One way info is filtered is shown by this cartoon
+
+No link between beige
+
+Headline: "Green Jelly Beans ..."
+
+Result is meaningless
 :::
 
 ## *"Why most published research findings are false"*
@@ -80,6 +108,16 @@ Better name:<br/>
 - Motivated cognition
     - "the influence of motives on memory, information processing & reasoning."
 - Journals reject negative or confirmation results
+
+::: {.notes}
+Selection needn't be deliberate
+
+Andrew Gelman's phrase - forking paths
+
+In psychology, the term "motivated cognition" - we are pre-disposed to find evidence for things we want to believe
+
+Journals want to publish interesting stories
+:::
 
 ## Unpublished work as Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
 
@@ -119,12 +157,22 @@ p_light <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequenc
 
 We can only see 5% of the universe.
 
+::: {.notes}
+Analogy with dark matter
+
+Meta-analysis - most of it is trying to estimate the unknown latent variable of what isn't published
+:::
+
 ## Solutions {background="#43464B" background-image="images/milky-way.jpeg"}
 ```{r darkmatter2}
 print(p_dark)
 ```
 
 Don't focus on testing a null hypothesis.
+
+::: {.notes}
+Solution is simple
+:::
 
 ## Solutions {background="#43464B" background-image="images/milky-way.jpeg"}
 ```{r darkmatter3}
@@ -135,29 +183,79 @@ Pre-register and publish [all]{style="color:yellow"} results.
 
 <!--- {reproducibility crisis -->
 
+::: {.notes}
+but takes time and a shift in culture
+
+But has already happened in medicine
+:::
+
 # False discovery rates in ecology {background="#37a635"}
 
+::: {.notes}
+That was the easy bit
+
+The second cause is more fundamental to how we do science - what Ioannidis' paper was about
+:::
+
 ## *"Why most published research findings are false"*
+High "false discovery rates", often much higher than 5 %
+
+- even when *p* < 0.05
 
 1. Low prior probabilities - unlikely / rare effects
 2. Low statistical power - low signal:noise
 3. Bias - systematic uncertainties in observation process
 
--> High "false discovery rates", often much higher than 5 %
+::: {.notes}
+Crux of Ioannidis' paper was high FDR
 
+3 reasons, last two common in ecology
+:::
 
 ## 1. Low prior probabilities
 ![](images/false_discovery_covid.png)
 
+::: {.notes}
+First of these is the same as the medical screening paradox - familiar from covid
+
+Disesaes are rare in the population - say 1%
+
+Take 1000 people, only 10 will have it
+:::
+
 ## {background-image="images/Slide2.jpg"  background-size=contain}
+
+::: {.notes}
+One example of same phenomenon in ecology - LUC
+
+Also spp ID from AI
+:::
 
 ## Example: Land-use change
 ![](images/false_discovery_luc.png)
 
+::: {.notes}
+Suppose satellite covers 100,000 km2 forest
+
+and you are looking for deforestation - rare in Europe - all same logic applies
+:::
+
 ## {background-image="images/Slide4.jpg"  background-size=contain}
+
+::: {.notes}
+Empirical evidence from UK study
+:::
 
 ## 2. Low statistical power
 ![](images/false_discovery_power.png)
+
+::: {.notes}
+What if effect is common but power is low?
+
+Power is true positive rate.
+
+Here, we have low denominator, so FDR relatively high
+:::
 
 ## 2. Effect of low power
 ```{r plotfdr}
@@ -195,17 +293,29 @@ p <- p + scale_color_discrete(name = "Power")
 p
 ```
 
-## 2. Low power in ecology
-Measurements are a proxy for true process of interest.
-Connection between the two can be:
+::: {.notes}
+All predictable with simple calculation
+:::
 
-- sample from population (sampling error)
-- imperfect measurements (measurement error)
-- proxy variables
-    - true variable is hard to measure but can be approximated
+## 2. Low power in ecology
+
+- large background variability cf. effect size
+- difficulty of measurement
+- small sample size
+- measurement error
+- measurements are a proxy for true process of interest
+    - error not propagated
+
+::: {.notes}
+Low power common in ecology
+:::
 
 ## Example: gas emissions from soil
 ![](images/measuringN2O_1.png){width=80%}
+
+::: {.notes}
+One example - point is mmnt is difficult
+:::
 
 ## Spatial variation in gas emissions
 ![](images/Crichton_Fn2o_interpolated_June2014_ggmap.png){width=90%}
@@ -216,6 +326,16 @@ Connection between the two can be:
 ## 3. Bias in observation process
 ![](images/false_discovery_bias.png)
 
+::: {.notes}
+Lastly, bias affects numerator
+
+Anything which could differ systematically between treatments
+
+The point of experiments is to avoid this
+
+But sometimes not possible in ecology
+:::
+
 ## Example: soil carbon change
 ::: columns
 ::: {.column width="70%"}
@@ -224,6 +344,18 @@ Connection between the two can be:
 ::: {.column width="30%"}
 ![](images/even_labs.png)
 :::
+:::
+
+::: aside
+Even et al, 2024, Biogeosciences.
+:::
+
+::: {.notes}
+Example: alot of interest in carbon credits
+
+But takes 10 years to detect change
+
+and hard to avoid bias
 :::
 
 ## 3. Effect of bias
@@ -250,11 +382,35 @@ p
 :::
  Stop using *p* values and "statistical significance".
 
+::: {.notes}
+Reproducibility Crisis is accepted as mainstream idea
+
+ASA have had had two Special Issues and Statements saying ...
+
+But not much has changed
+:::
+
 # Solutions {background="#37a635"}
+
+::: {.notes}
+The solution to the information architecture problem was quite simple - don't filter.
+
+The FDR problem is more fundamental & comes down to how we think about data analysis in science
+:::
 
 ## A Copernican Revolution {background-color="white" background-video="images/copernican_revolution.mp4"}
 
 ## A Copernican Revolution {background-color="white" background-image="images/copernican_revolution.png"}
+
+::: {.notes}
+We need to revise the way we think, like Copernicus did
+
+We used to see Earth as fixed and at the centre
+
+Conventionally we see data as fixed, and put a null model in relation to this
+
+In fact, if we think about how conditional probability works, it is the model that is central.
+:::
 
 ## In practice
 - don't take data at face value
@@ -294,16 +450,8 @@ Propagate the uncertainty in each measurement ...
 - Represent the uncertainty in data & obs process
 - Suggests Bayesian approach
 
-# Final Thoughts {background="#37a635"}
 
-## The real purpose of science
-
-*"... is to make sure Nature hasn't misled you into thinking you know something you don't actually know."*
-
-Robert Pirsig, 1974
-
-
-##
+## Summary
 ::: columns
 ::: {.column width="50%"}
 *"All models are wrong, but some are useful."*
@@ -317,7 +465,7 @@ George Box, 1976.
 :::
 :::
 
-##
+## Summary
 ::: columns
 ::: {.column width="50%"}
 *"All models are wrong, but some are useful."*
@@ -328,9 +476,9 @@ George Box, 1976.
 :::
 ::: {.column width="50%"}
 *"All [data]{style="color:red"} are wrong, but some are useful."*
-
-Patterson & Gimlin, 1967
+<br/> <br/>
 
 ![](images/bigfoot.jpg)
+<br/> Contact: plevy@ceh.ac.uk
 :::
 :::
