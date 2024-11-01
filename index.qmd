@@ -1,8 +1,8 @@
 ---
-title: "Tackling The Reproducibility Crisis In Ecology"
-subtitle: "ESA Annual Meeting 2024"
+title: "The Reproducibility Crisis In Ecology"
+subtitle: "Stats Network Meeting 2024"
 author: "Peter Levy, UK Centre for Ecology & Hydrology"
-date: "</br> '2024-08-07'"
+date: "</br> '2024-10-31'"
 footer: "[peterlevy.github.io/reproducibility_esa](https://peterlevy.github.io/reproducibility_esa/)"
 format:
   revealjs:
@@ -32,20 +32,6 @@ library(ggplot2)
 library(caTools)
 ```
 
-## Outline
-1. The Reproducibility Crisis - what is it?
-2. Causes
-3. Ecological examples
-4. Solutions?
-
-::: {.notes}
-A quick outline of what I'm going to talk about
-
-Two causes - one about how we publish
-
-- one about how we do science & analyse data
-:::
-
 ## The Reproducibility Crisis
 ::: columns
 ::: {.column width="40%"}
@@ -71,12 +57,88 @@ Now mainstream view - just what statiticians have said for decades about misinte
 2 causes
 :::
 
-# The information architecture of science {background="#37a635"}
 
 ::: {.notes}
-The cause I give a grandiose name
+The first cause is fundamental to how we do science - what Ioannidis' paper was about
+:::
 
-The process by which info gets from lab/field into the public domain
+## *"Why most published research findings are false"*
+High "false discovery rates", often much higher than 5 %
+
+- even when *p* < 0.05
+
+1. Low prior probabilities - unlikely / rare effects
+2. Low statistical power - low signal:noise
+3. Bias - systematic uncertainties in observation process
+
+::: {.notes}
+Crux of Ioannidis' paper was high FDR
+
+3 reasons, last two common in ecology
+:::
+
+## The medical screening paradox
+![](images/false_discovery_covid.png)
+
+::: {.notes}
+First of these is the same as the medical screening paradox - familiar from covid
+
+Disesaes are rare in the population - say 1%
+
+Take 1000 people, only 10 will have it
+:::
+
+## The effect of low power
+```{r plotfdr}
+alpha <- 0.05
+v_power <- c(0.2, 0.4, 0.8)
+v_prior <- seq(from = 0, to = 1, by = 0.01)
+v_bias  <- seq(from = 0, to = 1, by = 0.05)
+dt <- as.data.table(expand.grid(power = v_power, prior = v_prior, u = v_bias))
+
+# expected fdr, from Colquhoun 2014
+dt[, ppv := (prior * power)  / (prior * power  + alpha * (1 - prior))]
+dt[, fdr := 1 - ppv]
+
+# without bias, from Ioannidis 2005
+dt[, R := prior / (1- prior)] # prior odds
+# dt[, PPV := power * R / (R - (1 - power) * R + alpha)]
+# with bias, u, from Ioannidis 2005
+dt[, ppv_u := (power * R + u * (1- power) * R) /
+  (R + alpha - (1 - power) * R + u - u * alpha + u * (1 - power) * R)]
+dt[, fdr_u := 1 - ppv_u]
+
+p <- ggplot(dt[power == 0.8], aes(prior, fdr*100, colour = as.factor(power), group = power))
+p <- p + geom_line() + ylim(0, 100)
+p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
+# add legend title
+p <- p + scale_color_discrete(name = "Power")
+```
+
+```{r lowpower}
+p <- ggplot(dt, aes(prior, fdr*100, colour = as.factor(power), group = power))
+p <- p + geom_line() + ylim(0, 100)
+p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
+# add legend title
+p <- p + scale_color_discrete(name = "Power")
+p
+```
+
+::: {.notes}
+All predictable with simple calculation
+:::
+
+## Low power in ecology
+
+- large background variability cf. effect size
+- difficulty of measurement
+- small sample size
+- measurement error
+- measurements are a proxy for true process of interest
+    - error not propagated
+
+::: {.notes}
+Low power common in ecology
 :::
 
 ## *"Why most published research findings are false"*
@@ -163,6 +225,28 @@ Analogy with dark matter
 Meta-analysis - most of it is trying to estimate the unknown latent variable of what isn't published
 :::
 
+## The ASA statement
+::: columns
+::: {.column width="50%"}
+![](images/Wasserstein.png)
+
+2016
+:::
+::: {.column width="50%"}
+![](images/Wasserstein2.png)
+2019
+:::
+:::
+ Stop using *p* values and "statistical significance".
+
+::: {.notes}
+Reproducibility Crisis is accepted as mainstream idea
+
+ASA have had had two Special Issues and Statements saying ...
+
+But not much has changed
+:::
+
 ## Solutions {background="#43464B" background-image="images/milky-way.jpeg"}
 ```{r darkmatter2}
 print(p_dark)
@@ -189,230 +273,15 @@ but takes time and a shift in culture
 But has already happened in medicine
 :::
 
-# False discovery rates in ecology {background="#37a635"}
 
-::: {.notes}
-That was the easy bit
+## Registered reports
+- publish study design at proposal stage
+- allow peer review *before* data collection
+- state analysis methods a priori
+- prevents multiple testing problem
+- publish results irrespective of outcome
 
-The second cause is more fundamental to how we do science - what Ioannidis' paper was about
-:::
-
-## *"Why most published research findings are false"*
-High "false discovery rates", often much higher than 5 %
-
-- even when *p* < 0.05
-
-1. Low prior probabilities - unlikely / rare effects
-2. Low statistical power - low signal:noise
-3. Bias - systematic uncertainties in observation process
-
-::: {.notes}
-Crux of Ioannidis' paper was high FDR
-
-3 reasons, last two common in ecology
-:::
-
-## 1. Low prior probabilities
-![](images/false_discovery_covid.png)
-
-::: {.notes}
-First of these is the same as the medical screening paradox - familiar from covid
-
-Disesaes are rare in the population - say 1%
-
-Take 1000 people, only 10 will have it
-:::
-
-## {background-image="images/Slide2.jpg"  background-size=contain}
-
-::: {.notes}
-One example of same phenomenon in ecology - LUC
-
-Also spp ID from AI
-:::
-
-## Example: Land-use change
-![](images/false_discovery_luc.png)
-
-::: {.notes}
-Suppose satellite covers 100,000 km2 forest
-
-and you are looking for deforestation - rare in Europe - all same logic applies
-:::
-
-## {background-image="images/Slide4.jpg"  background-size=contain}
-
-::: {.notes}
-Empirical evidence from UK study
-:::
-
-## 2. Low statistical power
-![](images/false_discovery_power.png)
-
-::: {.notes}
-What if effect is common but power is low?
-
-Power is true positive rate.
-
-Here, we have low denominator, so FDR relatively high
-:::
-
-## 2. Effect of low power
-```{r plotfdr}
-alpha <- 0.05
-v_power <- c(0.2, 0.4, 0.8)
-v_prior <- seq(from = 0, to = 1, by = 0.01)
-v_bias  <- seq(from = 0, to = 1, by = 0.05)
-dt <- as.data.table(expand.grid(power = v_power, prior = v_prior, u = v_bias))
-
-# expected fdr, from Colquhoun 2014
-dt[, ppv := (prior * power)  / (prior * power  + alpha * (1 - prior))]
-dt[, fdr := 1 - ppv]
-
-# without bias, from Ioannidis 2005
-dt[, R := prior / (1- prior)] # prior odds
-# dt[, PPV := power * R / (R - (1 - power) * R + alpha)]
-# with bias, u, from Ioannidis 2005
-dt[, ppv_u := (power * R + u * (1- power) * R) /
-  (R + alpha - (1 - power) * R + u - u * alpha + u * (1 - power) * R)]
-dt[, fdr_u := 1 - ppv_u]
-
-p <- ggplot(dt[power == 0.8], aes(prior, fdr*100, colour = as.factor(power), group = power))
-p <- p + geom_line() + ylim(0, 100)
-p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
-# add legend title
-p <- p + scale_color_discrete(name = "Power")
-```
-
-```{r lowpower}
-p <- ggplot(dt, aes(prior, fdr*100, colour = as.factor(power), group = power))
-p <- p + geom_line() + ylim(0, 100)
-p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
-# add legend title
-p <- p + scale_color_discrete(name = "Power")
-p
-```
-
-::: {.notes}
-All predictable with simple calculation
-:::
-
-## 2. Low power in ecology
-
-- large background variability cf. effect size
-- difficulty of measurement
-- small sample size
-- measurement error
-- measurements are a proxy for true process of interest
-    - error not propagated
-
-::: {.notes}
-Low power common in ecology
-:::
-
-## Example: gas emissions from soil
-![](images/measuringN2O_1.png){width=80%}
-
-::: {.notes}
-One example - point is mmnt is difficult
-:::
-
-## Spatial variation in gas emissions
-![](images/Crichton_Fn2o_interpolated_June2014_ggmap.png){width=90%}
-
-## We need cumulative emissions
-![](images/measuringN2O_2.png){width=80%}
-
-## 3. Bias in observation process
-![](images/false_discovery_bias.png)
-
-::: {.notes}
-Lastly, bias affects numerator
-
-Anything which could differ systematically between treatments
-
-The point of experiments is to avoid this
-
-But sometimes not possible in ecology
-:::
-
-## Example: soil carbon change
-::: columns
-::: {.column width="70%"}
-![](images/soc_activities.png)
-:::
-::: {.column width="30%"}
-![](images/even_labs.png)
-:::
-:::
-
-::: aside
-Even et al, 2024, Biogeosciences.
-:::
-
-::: {.notes}
-Example: alot of interest in carbon credits
-
-But takes 10 years to detect change
-
-and hard to avoid bias
-:::
-
-## 3. Effect of bias
-```{r bias}
-p <- ggplot(dt[prior == 0.5], aes(u, fdr_u*100, colour = as.factor(power), group = power))
-p <- p + geom_line() + ylim(0, 100) + xlim(0, 1)
-p <- p + xlab("Bias") + ylab("False Discovery Rate (%)")
-p <- p + scale_color_discrete(name = "Power")
-#p <- p + facet_wrap(~ power, ncol = 1)
-p
-```
-
-## The ASA statement
-::: columns
-::: {.column width="50%"}
-![](images/Wasserstein.png)
-
-2016
-:::
-::: {.column width="50%"}
-![](images/Wasserstein2.png)
-2019
-:::
-:::
- Stop using *p* values and "statistical significance".
-
-::: {.notes}
-Reproducibility Crisis is accepted as mainstream idea
-
-ASA have had had two Special Issues and Statements saying ...
-
-But not much has changed
-:::
-
-# Solutions {background="#37a635"}
-
-::: {.notes}
-The solution to the information architecture problem was quite simple - don't filter.
-
-The FDR problem is more fundamental & comes down to how we think about data analysis in science
-:::
-
-## A Copernican Revolution {background-color="white" background-video="images/copernican_revolution.mp4"}
-
-## A Copernican Revolution {background-color="white" background-image="images/copernican_revolution.png"}
-
-::: {.notes}
-We need to revise the way we think, like Copernicus did
-
-We used to see Earth as fixed and at the centre
-
-Conventionally we see data as fixed, and put a null model in relation to this
-
-In fact, if we think about how conditional probability works, it is the model that is central.
-:::
-
-## In practice
+## Statistical approach
 - don't take data at face value
 - represent & propagate their uncertainties
 - represent potential biases
@@ -420,65 +289,11 @@ In fact, if we think about how conditional probability works, it is the model th
 - suits Monte Carlo or fully Bayesian approach
 - examples ...
 
-# Example: Land-Use Change {background="#37a635"}
-## {background-image="images/Slide8.jpg"  background-size=contain}
-## {background-image="images/Slide9.jpg"  background-size=contain}
-## {background-image="images/Slide10.jpg"  background-size=contain}
-## {background-image="images/Slide15.jpg"  background-size=contain}
-
-# Example: soil gas emissions {background="#37a635"}
-## Example: soil gas emissions
-Propagate the uncertainty in each measurement ...
-![](images/flux_uncertainty.png){width=75%}
-
-## Example: soil gas emissions
-... and in the spatio-temporal extrapolation ...
-![](images/time_space_3D_with_points.png){width=45%}
-![](images/time_space_3D_with_points_2.png){width=45%}
-
-## Example: soil gas emissions
-... to give posterior uncertainty in treatment effects.
-![](images/Sabah_Fn2o_postDensity.png){width=50%}
-
 ## Summary {background="#37a635"}
 - Reproducibilty (credibility) crisis arises from:
-    - information architecture i.e. filtering
     - misuse of null-hypothesis testing
+    - publication filtered by "significance"
 - In ecology, measurement is difficult & indirect ->
     - low statistical power
     - bias in obs process
-- Represent the uncertainty in data & obs process
-- Suggests Bayesian approach
-
-
-## Summary
-::: columns
-::: {.column width="50%"}
-*"All models are wrong, but some are useful."*
-
-George Box, 1976.
-
-![](images/george_box.jpg){width="50%"}
-:::
-::: {.column width="50%"}
-
-:::
-:::
-
-## Summary
-::: columns
-::: {.column width="50%"}
-*"All models are wrong, but some are useful."*
-
-George Box, 1976.
-
-![](images/george_box.jpg){width="50%"}
-:::
-::: {.column width="50%"}
-*"All [data]{style="color:red"} are wrong, but some are useful."*
-<br/> <br/>
-
-![](images/bigfoot.jpg)
-<br/> Contact: plevy@ceh.ac.uk
-:::
-:::
+- We need the same precautions as in medicine

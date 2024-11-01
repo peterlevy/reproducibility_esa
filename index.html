@@ -8,11 +8,11 @@
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Peter Levy, UK Centre for Ecology &amp; Hydrology">
-  <meta name="dcterms.date" content="2024-08-07">
-  <title>Tackling The Reproducibility Crisis In Ecology</title>
+  <meta name="dcterms.date" content="2024-10-31">
+  <title>The Reproducibility Crisis In Ecology</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -329,8 +329,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Tackling The Reproducibility Crisis In Ecology</h1>
-  <p class="subtitle">ESA Annual Meeting 2024</p>
+  <h1 class="title">The Reproducibility Crisis In Ecology</h1>
+  <p class="subtitle">Stats Network Meeting 2024</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -340,33 +340,7 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </div>
 </div>
 
-  <p class="date">2024-08-07</p>
-</section>
-<section id="outline" class="slide level2">
-<h2>Outline</h2>
-<ol type="1">
-<li>The Reproducibility Crisis - what is it?</li>
-<li>Causes</li>
-<li>Ecological examples</li>
-<li>Solutions?</li>
-</ol>
-<aside class="notes">
-<p>A quick outline of what I’m going to talk about</p>
-<p>Two causes - one about how we publish</p>
-<ul>
-<li>one about how we do science &amp; analyse data</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+  <p class="date">2024-10-31</p>
 </section>
 <section id="the-reproducibility-crisis" class="slide level2">
 <h2>The Reproducibility Crisis</h2>
@@ -380,8 +354,7 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <figcaption> Ioannidis, 2005, PLOS Medicine</figcaption>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <p>Results, not methods</p>
 <p>Dates back to a landmark paper with arresting title</p>
@@ -398,13 +371,8 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section>
-<section id="the-information-architecture-of-science" class="title-slide slide level1 center" data-background="#37a635">
-<h1>The information architecture of science</h1>
 <aside class="notes">
-<p>The cause I give a grandiose name</p>
-<p>The process by which info gets from lab/field into the public domain</p>
+<p>The first cause is fundamental to how we do science - what Ioannidis’ paper was about</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -419,6 +387,94 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </section>
 <section id="why-most-published-research-findings-are-false" class="slide level2">
 <h2><em>“Why most published research findings are false”</em></h2>
+<p>High “false discovery rates”, often much higher than 5 %</p>
+<ul>
+<li>even when <em>p</em> &lt; 0.05</li>
+</ul>
+<ol type="1">
+<li>Low prior probabilities - unlikely / rare effects</li>
+<li>Low statistical power - low signal:noise</li>
+<li>Bias - systematic uncertainties in observation process</li>
+</ol>
+<aside class="notes">
+<p>Crux of Ioannidis’ paper was high FDR</p>
+<p>3 reasons, last two common in ecology</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-medical-screening-paradox" class="slide level2">
+<h2>The medical screening paradox</h2>
+
+<img data-src="images/false_discovery_covid.png" class="r-stretch"><aside class="notes">
+<p>First of these is the same as the medical screening paradox - familiar from covid</p>
+<p>Disesaes are rare in the population - say 1%</p>
+<p>Take 1000 people, only 10 will have it</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-effect-of-low-power" class="slide level2">
+<h2>The effect of low power</h2>
+
+<img data-src="index_files/figure-revealjs/lowpower-1.png" width="960" class="r-stretch"><aside class="notes">
+<p>All predictable with simple calculation</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="low-power-in-ecology" class="slide level2">
+<h2>Low power in ecology</h2>
+<ul>
+<li>large background variability cf.&nbsp;effect size</li>
+<li>difficulty of measurement</li>
+<li>small sample size</li>
+<li>measurement error</li>
+<li>measurements are a proxy for true process of interest
+<ul>
+<li>error not propagated</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Low power common in ecology</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-most-published-research-findings-are-false-1" class="slide level2">
+<h2><em>“Why most published research findings are false”</em></h2>
 <div class="columns">
 <div class="column" style="width:35%;">
 <ul>
@@ -426,8 +482,7 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 </ul>
 </div><div class="column" style="width:65%;">
 <p><img data-src="images/significant2.png" style="width:80.0%"></p>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <p>One way info is filtered is shown by this cartoon</p>
 <p>No link between beige</p>
@@ -445,7 +500,7 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
           display:block!important;
       }</style></aside>
 </section>
-<section id="why-most-published-research-findings-are-false-1" class="slide level2">
+<section id="why-most-published-research-findings-are-false-2" class="slide level2">
 <h2><em>“Why most published research findings are false”</em></h2>
 <ul>
 <li>“<em>The garden of forking paths</em>”
@@ -495,6 +550,32 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
           display:block!important;
       }</style></aside>
 </section>
+<section id="the-asa-statement" class="slide level2">
+<h2>The ASA statement</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/Wasserstein.png"></p>
+<p>2016</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/Wasserstein2.png"> 2019</p>
+</div></div>
+<p>Stop using <em>p</em> values and “statistical significance”.</p>
+<aside class="notes">
+<p>Reproducibility Crisis is accepted as mainstream idea</p>
+<p>ASA have had had two Special Issues and Statements saying …</p>
+<p>But not much has changed</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="solutions" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
 <h2>Solutions</h2>
 
@@ -532,329 +613,19 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
-<section>
-<section id="false-discovery-rates-in-ecology" class="title-slide slide level1 center" data-background="#37a635">
-<h1>False discovery rates in ecology</h1>
-<aside class="notes">
-<p>That was the easy bit</p>
-<p>The second cause is more fundamental to how we do science - what Ioannidis’ paper was about</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
-<section id="why-most-published-research-findings-are-false-2" class="slide level2">
-<h2><em>“Why most published research findings are false”</em></h2>
-<p>High “false discovery rates”, often much higher than 5 %</p>
+<section id="registered-reports" class="slide level2">
+<h2>Registered reports</h2>
 <ul>
-<li>even when <em>p</em> &lt; 0.05</li>
+<li>publish study design at proposal stage</li>
+<li>allow peer review <em>before</em> data collection</li>
+<li>state analysis methods a priori</li>
+<li>prevents multiple testing problem</li>
+<li>publish results irrespective of outcome</li>
 </ul>
-<ol type="1">
-<li>Low prior probabilities - unlikely / rare effects</li>
-<li>Low statistical power - low signal:noise</li>
-<li>Bias - systematic uncertainties in observation process</li>
-</ol>
-<aside class="notes">
-<p>Crux of Ioannidis’ paper was high FDR</p>
-<p>3 reasons, last two common in ecology</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
-<section id="low-prior-probabilities" class="slide level2">
-<h2>1. Low prior probabilities</h2>
-
-<img data-src="images/false_discovery_covid.png" class="r-stretch"><aside class="notes">
-<p>First of these is the same as the medical screening paradox - familiar from covid</p>
-<p>Disesaes are rare in the population - say 1%</p>
-<p>Take 1000 people, only 10 will have it</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="section" class="slide level2" data-background-image="images/Slide2.jpg" data-background-size="contain">
-<h2></h2>
-<aside class="notes">
-<p>One example of same phenomenon in ecology - LUC</p>
-<p>Also spp ID from AI</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="example-land-use-change" class="slide level2">
-<h2>Example: Land-use change</h2>
-
-<img data-src="images/false_discovery_luc.png" class="r-stretch"><aside class="notes">
-<p>Suppose satellite covers 100,000 km2 forest</p>
-<p>and you are looking for deforestation - rare in Europe - all same logic applies</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="section-1" class="slide level2" data-background-image="images/Slide4.jpg" data-background-size="contain">
-<h2></h2>
-<aside class="notes">
-<p>Empirical evidence from UK study</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="low-statistical-power" class="slide level2">
-<h2>2. Low statistical power</h2>
-
-<img data-src="images/false_discovery_power.png" class="r-stretch"><aside class="notes">
-<p>What if effect is common but power is low?</p>
-<p>Power is true positive rate.</p>
-<p>Here, we have low denominator, so FDR relatively high</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="effect-of-low-power" class="slide level2">
-<h2>2. Effect of low power</h2>
-
-<img data-src="index_files/figure-revealjs/lowpower-1.png" width="960" class="r-stretch"><aside class="notes">
-<p>All predictable with simple calculation</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="low-power-in-ecology" class="slide level2">
-<h2>2. Low power in ecology</h2>
-<ul>
-<li>large background variability cf.&nbsp;effect size</li>
-<li>difficulty of measurement</li>
-<li>small sample size</li>
-<li>measurement error</li>
-<li>measurements are a proxy for true process of interest
-<ul>
-<li>error not propagated</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>Low power common in ecology</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="example-gas-emissions-from-soil" class="slide level2">
-<h2>Example: gas emissions from soil</h2>
-
-<img data-src="images/measuringN2O_1.png" style="width:80.0%" class="r-stretch"><aside class="notes">
-<p>One example - point is mmnt is difficult</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="spatial-variation-in-gas-emissions" class="slide level2">
-<h2>Spatial variation in gas emissions</h2>
-
-<img data-src="images/Crichton_Fn2o_interpolated_June2014_ggmap.png" style="width:90.0%" class="r-stretch"></section>
-<section id="we-need-cumulative-emissions" class="slide level2">
-<h2>We need cumulative emissions</h2>
-
-<img data-src="images/measuringN2O_2.png" style="width:80.0%" class="r-stretch"></section>
-<section id="bias-in-observation-process" class="slide level2">
-<h2>3. Bias in observation process</h2>
-
-<img data-src="images/false_discovery_bias.png" class="r-stretch"><aside class="notes">
-<p>Lastly, bias affects numerator</p>
-<p>Anything which could differ systematically between treatments</p>
-<p>The point of experiments is to avoid this</p>
-<p>But sometimes not possible in ecology</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="example-soil-carbon-change" class="slide level2">
-<h2>Example: soil carbon change</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<p><img data-src="images/soc_activities.png"></p>
-</div><div class="column" style="width:30%;">
-<p><img data-src="images/even_labs.png"></p>
-</div>
-</div>
-
-<aside class="notes">
-<p>Example: alot of interest in carbon credits</p>
-<p>But takes 10 years to detect change</p>
-<p>and hard to avoid bias</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<aside><div>
-<p>Even et al, 2024, Biogeosciences.</p>
-</div></aside></section>
-<section id="effect-of-bias" class="slide level2">
-<h2>3. Effect of bias</h2>
-
-<img data-src="index_files/figure-revealjs/bias-1.png" width="960" class="r-stretch"></section>
-<section id="the-asa-statement" class="slide level2">
-<h2>The ASA statement</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="images/Wasserstein.png"></p>
-<p>2016</p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="images/Wasserstein2.png"> 2019</p>
-</div>
-</div>
-<p>Stop using <em>p</em> values and “statistical significance”.</p>
-<aside class="notes">
-<p>Reproducibility Crisis is accepted as mainstream idea</p>
-<p>ASA have had had two Special Issues and Statements saying …</p>
-<p>But not much has changed</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="solutions-2" class="title-slide slide level1 center" data-background="#37a635">
-<h1>Solutions</h1>
-<aside class="notes">
-<p>The solution to the information architecture problem was quite simple - don’t filter.</p>
-<p>The FDR problem is more fundamental &amp; comes down to how we think about data analysis in science</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="a-copernican-revolution" class="slide level2" data-background-color="white" data-background-video="images/copernican_revolution.mp4">
-<h2>A Copernican Revolution</h2>
-</section>
-<section id="a-copernican-revolution-1" class="slide level2" data-background-color="white" data-background-image="images/copernican_revolution.png">
-<h2>A Copernican Revolution</h2>
-<aside class="notes">
-<p>We need to revise the way we think, like Copernicus did</p>
-<p>We used to see Earth as fixed and at the centre</p>
-<p>Conventionally we see data as fixed, and put a null model in relation to this</p>
-<p>In fact, if we think about how conditional probability works, it is the model that is central.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="in-practice" class="slide level2">
-<h2>In practice</h2>
+<section id="statistical-approach" class="slide level2">
+<h2>Statistical approach</h2>
 <ul>
 <li>don’t take data at face value</li>
 <li>represent &amp; propagate their uncertainties</li>
@@ -863,89 +634,29 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
 <li>suits Monte Carlo or fully Bayesian approach</li>
 <li>examples …</li>
 </ul>
-</section></section>
-<section>
-<section id="example-land-use-change-1" class="title-slide slide level1 center" data-background="#37a635">
-<h1>Example: Land-Use Change</h1>
-
-</section>
-<section id="section-2" class="slide level2" data-background-image="images/Slide8.jpg" data-background-size="contain">
-<h2></h2>
-</section>
-<section id="section-3" class="slide level2" data-background-image="images/Slide9.jpg" data-background-size="contain">
-<h2></h2>
-</section>
-<section id="section-4" class="slide level2" data-background-image="images/Slide10.jpg" data-background-size="contain">
-<h2></h2>
-</section>
-<section id="section-5" class="slide level2" data-background-image="images/Slide15.jpg" data-background-size="contain">
-<h2></h2>
-</section></section>
-<section>
-<section id="example-soil-gas-emissions" class="title-slide slide level1 center" data-background="#37a635">
-<h1>Example: soil gas emissions</h1>
-
-</section>
-<section id="example-soil-gas-emissions-1" class="slide level2">
-<h2>Example: soil gas emissions</h2>
-<p>Propagate the uncertainty in each measurement … <img data-src="images/flux_uncertainty.png" style="width:75.0%"></p>
-</section>
-<section id="example-soil-gas-emissions-2" class="slide level2">
-<h2>Example: soil gas emissions</h2>
-<p>… and in the spatio-temporal extrapolation … <img data-src="images/time_space_3D_with_points.png" style="width:45.0%"> <img data-src="images/time_space_3D_with_points_2.png" style="width:45.0%"></p>
-</section>
-<section id="example-soil-gas-emissions-3" class="slide level2">
-<h2>Example: soil gas emissions</h2>
-<p>… to give posterior uncertainty in treatment effects. <img data-src="images/Sabah_Fn2o_postDensity.png" style="width:50.0%"></p>
 </section>
 <section id="summary" class="slide level2" data-background="#37a635">
 <h2>Summary</h2>
 <ul>
 <li>Reproducibilty (credibility) crisis arises from:
 <ul>
-<li>information architecture i.e.&nbsp;filtering</li>
 <li>misuse of null-hypothesis testing</li>
+<li>publication filtered by “significance”</li>
 </ul></li>
 <li>In ecology, measurement is difficult &amp; indirect -&gt;
 <ul>
 <li>low statistical power</li>
 <li>bias in obs process</li>
 </ul></li>
-<li>Represent the uncertainty in data &amp; obs process</li>
-<li>Suggests Bayesian approach</li>
+<li>We need the same precautions as in medicine</li>
 </ul>
-</section>
-<section id="summary-1" class="slide level2">
-<h2>Summary</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><em>“All models are wrong, but some are useful.”</em></p>
-<p>George Box, 1976.</p>
-<p><img data-src="images/george_box.jpg" style="width:50.0%"></p>
-</div><div class="column" style="width:50%;">
-
-</div>
-</div>
-</section>
-<section id="summary-2" class="slide level2">
-<h2>Summary</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><em>“All models are wrong, but some are useful.”</em></p>
-<p>George Box, 1976.</p>
-<p><img data-src="images/george_box.jpg" style="width:50.0%"></p>
-</div><div class="column" style="width:50%;">
-<p><em>“All <span style="color:red">data</span> are wrong, but some are useful.”</em> <br> <br></p>
-<p><img data-src="images/bigfoot.jpg"> <br> Contact: plevy@ceh.ac.uk</p>
-</div>
-</div>
 <div class="quarto-auto-generated-content">
 <p><img src="images/logo/UKCEH-Logo_Short_Positive_RGB.png" class="slide-logo"></p>
 <div class="footer footer-default">
 <p><a href="https://peterlevy.github.io/reproducibility_esa/">peterlevy.github.io/reproducibility_esa</a></p>
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -1266,18 +977,7 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1309,7 +1009,29 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1317,7 +1039,7 @@ Peter Levy, UK Centre for Ecology &amp; Hydrology
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
