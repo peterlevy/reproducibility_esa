@@ -2,7 +2,7 @@
 title: "The Reproducibility Crisis In Ecology"
 subtitle: "Stats Network Meeting 2024"
 author: "Peter Levy, UK Centre for Ecology & Hydrology"
-date: "</br> '2024-10-31'"
+date: "</br> '2024-11-04'"
 footer: "[peterlevy.github.io/reproducibility_esa](https://peterlevy.github.io/reproducibility_esa/)"
 format:
   revealjs:
@@ -63,9 +63,15 @@ The first cause is fundamental to how we do science - what Ioannidis' paper was 
 :::
 
 ## *"Why most published research findings are false"*
-High "false discovery rates", often much higher than 5 %
 
-- even when *p* < 0.05
+1. High "false discovery rates"
+2. Hypothesising after results are known
+3. Publication bias
+
+
+## High "false discovery rates"
+
+Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when:
 
 1. Low prior probabilities - unlikely / rare effects
 2. Low statistical power - low signal:noise
@@ -141,11 +147,11 @@ All predictable with simple calculation
 Low power common in ecology
 :::
 
-## *"Why most published research findings are false"*
+## Hypothesising after results are known
 
 ::: columns
 ::: {.column width="35%"}
-- The multiple testing problem
+- Hidden multiple testing problem
 :::
 
 ::: {.column width="65%"}
@@ -163,13 +169,12 @@ Headline: "Green Jelly Beans ..."
 Result is meaningless
 :::
 
-## *"Why most published research findings are false"*
-- "*The garden of forking paths*"
+## Hypothesising after results are known
+- "Researcher degrees of freedom"
     - many possible choices in data collection & analysis
     - choices favour finding *interesting* patterns
 - Motivated cognition
     - "the influence of motives on memory, information processing & reasoning."
-- Journals reject negative or confirmation results
 
 ::: {.notes}
 Selection needn't be deliberate
@@ -181,7 +186,7 @@ In psychology, the term "motivated cognition" - we are pre-disposed to find evid
 Journals want to publish interesting stories
 :::
 
-## Unpublished work as Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
+## Publication bias & Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
 
 ```{r darkmatter}
 library(magrittr)
@@ -247,7 +252,46 @@ ASA have had had two Special Issues and Statements saying ...
 But not much has changed
 :::
 
-## Solutions {background="#43464B" background-image="images/milky-way.jpeg"}
+## Changes in biomedical research
+
+::: columns
+::: {.column width="50%"}
+- double-blind trials
+- attention to hidden bias
+    - placebos etc.
+- pre-registration
+:::
+::: {.column width="50%"}
+![](images/Cochrane1.png)
+![](images/ClinicalTrials.jpg)
+:::
+:::
+
+## Registered reports
+![](images/Registered-reports.png){width="50%"}
+
+- publish study design at proposal stage
+- allow peer review *before* data collection
+- state analysis methods *a priori*
+- limits "hypothesising after results are known"
+- publish results irrespective of outcome
+
+## Changes in ecological research
+
+::: columns
+::: {.column width="50%"}
+Much slower
+
+- registered reports introduced by BES
+- ...
+:::
+::: {.column width="50%"}
+![](images/sortee.png)
+![](images/ecol_sol_evid.jpg){width="50%"}
+:::
+:::
+
+## Summary {background="#43464B" background-image="images/milky-way.jpeg"}
 ```{r darkmatter2}
 print(p_dark)
 ```
@@ -258,7 +302,7 @@ Don't focus on testing a null hypothesis.
 Solution is simple
 :::
 
-## Solutions {background="#43464B" background-image="images/milky-way.jpeg"}
+## Summary {background="#43464B" background-image="images/milky-way.jpeg"}
 ```{r darkmatter3}
 print(p_light)
 ```
@@ -273,27 +317,3 @@ but takes time and a shift in culture
 But has already happened in medicine
 :::
 
-
-## Registered reports
-- publish study design at proposal stage
-- allow peer review *before* data collection
-- state analysis methods a priori
-- prevents multiple testing problem
-- publish results irrespective of outcome
-
-## Statistical approach
-- don't take data at face value
-- represent & propagate their uncertainties
-- represent potential biases
-- often goes beyond off-the-shelf stats model
-- suits Monte Carlo or fully Bayesian approach
-- examples ...
-
-## Summary {background="#37a635"}
-- Reproducibilty (credibility) crisis arises from:
-    - misuse of null-hypothesis testing
-    - publication filtered by "significance"
-- In ecology, measurement is difficult & indirect ->
-    - low statistical power
-    - bias in obs process
-- We need the same precautions as in medicine
