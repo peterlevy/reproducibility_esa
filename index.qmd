@@ -1,8 +1,8 @@
 ---
-title: "The Reproducibility Crisis In Ecology"
-subtitle: "Stats Network Meeting 2024"
+title: "Tackling the reproducibility problem in ecology"
+subtitle: "Royal Statistical Society Conference 2025"
 author: "Peter Levy, UK Centre for Ecology & Hydrology"
-date: "</br> '2024-11-04'"
+date: "</br> '2025-09-03'"
 footer: "[peterlevy.github.io/reproducibility_esa](https://peterlevy.github.io/reproducibility_esa/)"
 format:
   revealjs:
@@ -32,15 +32,17 @@ library(ggplot2)
 library(caTools)
 ```
 
-## The Reproducibility Crisis
+## The Reproducibility Problem
 ::: columns
 ::: {.column width="40%"}
 Reproducibility<br/>
 of [results]{style="color:red"},<br/>
 not methods.
 <br/><br/>
-Better name:<br/>
-"*Credibility* crisis"?
+Causes:
+
+- publication filtering
+- high false discovery rates
 :::
 ::: {.column width="60%"}
 ![\label{fig:Ioannidis2005} Ioannidis, 2005, PLOS Medicine](images/Ioannidis2005.png)
@@ -62,131 +64,7 @@ Now mainstream view - just what statiticians have said for decades about misinte
 The first cause is fundamental to how we do science - what Ioannidis' paper was about
 :::
 
-## *"Why most published research findings are false"*
-
-1. High "false discovery rates"
-2. Hypothesising after results are known
-3. Publication bias
-
-
-## High "false discovery rates"
-
-Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when:
-
-1. Low prior probabilities - unlikely / rare effects
-2. Low statistical power - low signal:noise
-3. Bias - systematic uncertainties in observation process
-
-::: {.notes}
-Crux of Ioannidis' paper was high FDR
-
-3 reasons, last two common in ecology
-:::
-
-## The medical screening paradox
-![](images/false_discovery_covid.png)
-
-::: {.notes}
-First of these is the same as the medical screening paradox - familiar from covid
-
-Disesaes are rare in the population - say 1%
-
-Take 1000 people, only 10 will have it
-:::
-
-## The effect of low power
-```{r plotfdr}
-alpha <- 0.05
-v_power <- c(0.2, 0.4, 0.8)
-v_prior <- seq(from = 0, to = 1, by = 0.01)
-v_bias  <- seq(from = 0, to = 1, by = 0.05)
-dt <- as.data.table(expand.grid(power = v_power, prior = v_prior, u = v_bias))
-
-# expected fdr, from Colquhoun 2014
-dt[, ppv := (prior * power)  / (prior * power  + alpha * (1 - prior))]
-dt[, fdr := 1 - ppv]
-
-# without bias, from Ioannidis 2005
-dt[, R := prior / (1- prior)] # prior odds
-# dt[, PPV := power * R / (R - (1 - power) * R + alpha)]
-# with bias, u, from Ioannidis 2005
-dt[, ppv_u := (power * R + u * (1- power) * R) /
-  (R + alpha - (1 - power) * R + u - u * alpha + u * (1 - power) * R)]
-dt[, fdr_u := 1 - ppv_u]
-
-p <- ggplot(dt[power == 0.8], aes(prior, fdr*100, colour = as.factor(power), group = power))
-p <- p + geom_line() + ylim(0, 100)
-p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
-# add legend title
-p <- p + scale_color_discrete(name = "Power")
-```
-
-```{r lowpower}
-p <- ggplot(dt, aes(prior, fdr*100, colour = as.factor(power), group = power))
-p <- p + geom_line() + ylim(0, 100)
-p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
-# add legend title
-p <- p + scale_color_discrete(name = "Power")
-p
-```
-
-::: {.notes}
-All predictable with simple calculation
-:::
-
-## Low power in ecology
-
-- large background variability cf. effect size
-- difficulty of measurement
-- small sample size
-- measurement error
-- measurements are a proxy for true process of interest
-    - error not propagated
-
-::: {.notes}
-Low power common in ecology
-:::
-
-## Hypothesising after results are known
-
-::: columns
-::: {.column width="35%"}
-- Hidden multiple testing problem
-:::
-
-::: {.column width="65%"}
-![](images/significant2.png){width="80%"}
-:::
-:::
-
-::: {.notes}
-One way info is filtered is shown by this cartoon
-
-No link between beige
-
-Headline: "Green Jelly Beans ..."
-
-Result is meaningless
-:::
-
-## Hypothesising after results are known
-- "Researcher degrees of freedom"
-    - many possible choices in data collection & analysis
-    - choices favour finding *interesting* patterns
-- Motivated cognition
-    - "the influence of motives on memory, information processing & reasoning."
-
-::: {.notes}
-Selection needn't be deliberate
-
-Andrew Gelman's phrase - forking paths
-
-In psychology, the term "motivated cognition" - we are pre-disposed to find evidence for things we want to believe
-
-Journals want to publish interesting stories
-:::
-
-## Publication bias & Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
+## Publication filtering {background="#43464B" background-image="images/milky-way.jpeg"}
 
 ```{r darkmatter}
 library(magrittr)
@@ -201,12 +79,22 @@ df_dens <- density(y, from = -100, to = 100) %$%
   data.frame(x = x, y = y) %>%
   mutate(area = x >= cutoff)
 names(df_dens) <- c("Effect_size", "Frequency", "Published")
-p_dark <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
+p_dark <- ggplot(
+  data = df_dens,
+  aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)
+) +
   geom_ribbon() +
   scale_fill_manual(values = c("dark grey", "yellow")) +
   geom_line(aes(y = Frequency)) +
   geom_vline(xintercept = cutoff, colour = "red") +
-  annotate(geom = 'text', x = cutoff, y = 0.0125, colour = "red", label = 'Significant at p=5%', hjust = -0.1)
+  annotate(
+    geom = "text",
+    x = cutoff,
+    y = 0.0125,
+    colour = "red",
+    label = "Significant at p=5%",
+    hjust = -0.1
+  )
 print(p_dark)
 
 # remove the significance level criterion
@@ -216,13 +104,16 @@ df_dens <- density(y, from = -100, to = 100) %$%
   data.frame(x = x, y = y) %>%
   mutate(area = x >= cutoff)
 names(df_dens) <- c("Effect_size", "Frequency", "Published")
-p_light <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
+p_light <- ggplot(
+  data = df_dens,
+  aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)
+) +
   geom_ribbon() +
   scale_fill_manual(values = c("dark grey", "yellow")) +
   geom_line(aes(y = Frequency))
 ```
 
-We can only see 5% of the universe.
+Like Dark Matter, can we only see 5% of the literature/universe?
 
 ::: {.notes}
 Analogy with dark matter
@@ -230,90 +121,43 @@ Analogy with dark matter
 Meta-analysis - most of it is trying to estimate the unknown latent variable of what isn't published
 :::
 
-## The ASA statement
+## False Discovery Rates
+![](images/false_discovery_power2.png)
+
+## Low power in ecology
+
+- large background variability cf. effect size
+- difficulty of measurement
+- small sample size
+- measurement error
+- measurements are a proxy for true process of interest
+    - error not propagated
+- BUT almost never reported
+
+## Solutions: follow biomedicine
 ::: columns
 ::: {.column width="50%"}
-![](images/Wasserstein.png)
+![](images/Cochrane1.png){width="50%"}
+![](images/ClinicalTrials.jpg){width="50%"}
 
-2016
-:::
-::: {.column width="50%"}
-![](images/Wasserstein2.png)
-2019
-:::
-:::
- Stop using *p* values and "statistical significance".
-
-::: {.notes}
-Reproducibility Crisis is accepted as mainstream idea
-
-ASA have had had two Special Issues and Statements saying ...
-
-But not much has changed
-:::
-
-## Changes in biomedical research
-
-::: columns
-::: {.column width="50%"}
 - double-blind trials
 - attention to hidden bias
     - placebos etc.
-- pre-registration
 :::
 ::: {.column width="50%"}
-![](images/Cochrane1.png)
-![](images/ClinicalTrials.jpg)
-:::
-:::
+![](images/Registered-reports.png){width="80%"}
 
-## Registered reports
-![](images/Registered-reports.png){width="50%"}
-
-- publish study design at proposal stage
-- allow peer review *before* data collection
-- state analysis methods *a priori*
+- registered reports
 - limits "hypothesising after results are known"
 - publish results irrespective of outcome
-
-## Changes in ecological research
-
-::: columns
-::: {.column width="50%"}
-Much slower
-
-- registered reports introduced by BES
-- ...
-:::
-::: {.column width="50%"}
-![](images/sortee.png)
-![](images/ecol_sol_evid.jpg){width="50%"}
+- adopt Bayesian viewpoint
 :::
 :::
-
-## Summary {background="#43464B" background-image="images/milky-way.jpeg"}
-```{r darkmatter2}
-print(p_dark)
-```
-
-Don't focus on testing a null hypothesis.
 
 ::: {.notes}
 Solution is simple
+- allow peer review *before* data collection
+- state analysis methods *a priori*
 :::
 
-## Summary {background="#43464B" background-image="images/milky-way.jpeg"}
-```{r darkmatter3}
-print(p_light)
-```
-
-Pre-register and publish [all]{style="color:yellow"} results.
-
-<!--- {reproducibility crisis -->
-
-::: {.notes}
-but takes time and a shift in culture
-
-But has already happened in medicine
-:::
-
+## A Copernican Revolution {background-color="white" background-image="images/copernican_revolution2.png"}
