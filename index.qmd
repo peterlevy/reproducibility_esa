@@ -45,7 +45,7 @@ Causes:
 - high false discovery rates
 :::
 ::: {.column width="60%"}
-![\label{fig:Ioannidis2005} Ioannidis, 2005, PLOS Medicine](images/Ioannidis2005.png)
+![\label{fig:Ioannidis2005} Ioannidis, 2005, PLOS Medicine](images/Ioannidis2005.png){width="90%"}
 :::
 :::
 
@@ -159,5 +159,3 @@ Solution is simple
 - allow peer review *before* data collection
 - state analysis methods *a priori*
 :::
-
-## A Copernican Revolution {background-color="white" background-image="images/copernican_revolution2.png"}
