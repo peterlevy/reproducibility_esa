@@ -1,8 +1,8 @@
 ---
-title: "The Reproducibility Crisis In Ecology"
-subtitle: "Stats Network Meeting 2024"
-author: "Peter Levy, UK Centre for Ecology & Hydrology"
-date: "</br> '2024-11-04'"
+title: "Tackling the Reproducibility Crisis In Ecology"
+subtitle: "UKCEH Discovery Week 2025"
+author: "Peter Levy & Fiona Seaton"
+date: "</br> '2025-11-26'"
 footer: "[peterlevy.github.io/reproducibility_esa](https://peterlevy.github.io/reproducibility_esa/)"
 format:
   revealjs:
@@ -29,59 +29,184 @@ here::i_am("index.qmd")
 library(here)
 library(data.table)
 library(ggplot2)
-library(caTools)
 ```
 
-## The Reproducibility Crisis
+## Schedule
+
+| Time | Topic | Who |
+| ----- | ----- | ----- |
+| 11:00-11:10 | Causes  | Peter Levy | 
+| 11:10-11:20 | Solutions | Fiona Seaton |
+| 11:20-11:25 | Interactive Exercise | All |
+| 11:20-11:25 | Open Discussion | All |
+
+## The "Reproducibility Crisis"
+
+- Reproducibility of [results]{style="color:red"}, not methods
+- Clear problems in psychology, social science & biomedicine.
+- Do these problems affect ecology?
+
+# Causes
+
+## Reproducibility Crisis: Causes
+
+1. Publication bias against
+    - negative results
+    - confirmation / "me too" results
+2. Misinterpretation of statistics
+    - -> high "false discovery rates"
+
+## Publication bias
 ::: columns
-::: {.column width="40%"}
-Reproducibility<br/>
-of [results]{style="color:red"},<br/>
-not methods.
-<br/><br/>
-Better name:<br/>
-"*Credibility* crisis"?
+::: {.column width="80%"}
+![](images/bem_paper.png)
+
+- Results failed to reproduce in other studies
+- Journals [would not publish]{style="color:red"} these "negative" studies
 :::
-::: {.column width="60%"}
+::: {.column width="20%"}
+![Bem 2011 "proves pre-cognition".](images/psychic.jpg)
+:::
+:::
+
+## Publication bias & Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
+```{r darkmatter}
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+set.seed(456)
+y <- rnorm(10000, 0, 33)
+# hist(y)
+cutoff <- quantile(y, probs = 0.95)
+
+df_dens <- density(y, from = -100, to = 100) %$%
+  data.frame(x = x, y = y) %>%
+  mutate(area = x >= cutoff)
+names(df_dens) <- c("Effect_size", "Frequency", "Published")
+p_dark <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
+  geom_ribbon() +
+  scale_fill_manual(values = c("dark grey", "yellow")) +
+  geom_line(aes(y = Frequency)) +
+  geom_vline(xintercept = cutoff, colour = "red") +
+  annotate(geom = 'text', x = cutoff, y = 0.0125, colour = "red", label = 'Significant at p=5%', hjust = -0.1)
+print(p_dark)
+
+# remove the significance level criterion
+cutoff <- quantile(y, probs = 0.001)
+
+df_dens <- density(y, from = -100, to = 100) %$%
+  data.frame(x = x, y = y) %>%
+  mutate(area = x >= cutoff)
+names(df_dens) <- c("Effect_size", "Frequency", "Published")
+p_light <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
+  geom_ribbon() +
+  scale_fill_manual(values = c("dark grey", "yellow")) +
+  geom_line(aes(y = Frequency))
+```
+
+Can we only see 5% of the universe?
+
+::: {.notes}
+Analogy with dark matter
+
+Meta-analysis - most of it is trying to estimate the unknown latent variable of what is not published
+:::
+
+## Misinterpretation of statistics
+::: columns
+::: {.column width="65%"}
 ![\label{fig:Ioannidis2005} Ioannidis, 2005, PLOS Medicine](images/Ioannidis2005.png)
 :::
+::: {.column width="35%"}
+- Misinterpretation<br/>of *p* values<br/> as a guide to truth of results
+- => High "false discovery rates"
 :::
-
-::: {.notes}
-Results, not methods
-
-Dates back to a landmark paper with arresting title
-
-Now mainstream view - just what statiticians have said for decades about misinterpreting p values
-
-2 causes
 :::
-
-
-::: {.notes}
-The first cause is fundamental to how we do science - what Ioannidis' paper was about
-:::
-
-## *"Why most published research findings are false"*
-
-1. High "false discovery rates"
-2. Hypothesising after results are known
-3. Publication bias
-
 
 ## High "false discovery rates"
-
 Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when:
 
-1. Low prior probabilities - unlikely / rare effects
-2. Low statistical power - low signal:noise
-3. Bias - systematic uncertainties in observation process
+1. Sample size is small (low "statistical power")
+2. Effect size is small low signal:noise
+3. Greater number of alternative hypotheses/possible covariates
+4. Greater flexibility in designs, definitions, outcomes, and analytical modes
+5. Greater vested interests / prejudices
+6. Bias - systematic uncertainties in observation process
+
+## High "false discovery rates"
+Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when:
+
+1. Sample size is small (low "statistical power")
+2. Effect size is small low signal:noise
+3. Greater number of alternative hypotheses/possible covariates
+4. Greater flexibility in designs, definitions, outcomes, and analytical modes
+5. Greater vested interests / prejudices
+6. Bias - systematic uncertainties in observation process
+
+## Hypothesising after results are known
+
+::: columns
+::: {.column width="35%"}
+- Exploratory study presented as confirmation
+:::
+
+::: {.column width="65%"}
+![](images/harking.png){width="80%"}
+:::
+:::
+
+## Hypothesising after results are known
+
+::: columns
+::: {.column width="35%"}
+- Hidden multiple testing problem
+:::
+
+::: {.column width="65%"}
+![](images/significant2.png){width="80%"}
+:::
+:::
+
+
+## Hypothesising after results are known
+- "Researcher degrees of freedom"
+    - many possible choices in data collection & analysis
+    - choices favour finding *interesting* patterns
+- Motivated cognition
+    - "the influence of motives on memory, information processing & reasoning."
 
 ::: {.notes}
-Crux of Ioannidis' paper was high FDR
+Selection needn't be deliberate
 
-3 reasons, last two common in ecology
+Andrew Gelman's phrase - forking paths
+
+In psychology, the term "motivated cognition" - we are pre-disposed to find evidence for things we want to believe
+
+Journals want to publish interesting stories
 :::
+
+## The ASA statement
+::: columns
+::: {.column width="50%"}
+![](images/Wasserstein.png)
+
+2016
+:::
+::: {.column width="50%"}
+![](images/Wasserstein2.png)
+2019
+:::
+:::
+ Stop using *p* values and "statistical significance".
+
+::: {.notes}
+Reproducibility Crisis is accepted as mainstream idea
+
+ASA have had had two Special Issues and Statements saying ...
+
+But not much has changed
+:::
+
 
 ## The medical screening paradox
 ![](images/false_discovery_covid.png)
@@ -134,6 +259,7 @@ p
 All predictable with simple calculation
 :::
 
+# Does this apply in ecology?
 ## Low power in ecology
 
 - large background variability cf. effect size
@@ -143,114 +269,13 @@ All predictable with simple calculation
 - measurements are a proxy for true process of interest
     - error not propagated
 
-::: {.notes}
-Low power common in ecology
-:::
+## Publication bias in ecology?
+![](images/replication_graph.jpg)
 
-## Hypothesising after results are known
+## Same data, many analysts
+![](images/gould.png)
 
-::: columns
-::: {.column width="35%"}
-- Hidden multiple testing problem
-:::
-
-::: {.column width="65%"}
-![](images/significant2.png){width="80%"}
-:::
-:::
-
-::: {.notes}
-One way info is filtered is shown by this cartoon
-
-No link between beige
-
-Headline: "Green Jelly Beans ..."
-
-Result is meaningless
-:::
-
-## Hypothesising after results are known
-- "Researcher degrees of freedom"
-    - many possible choices in data collection & analysis
-    - choices favour finding *interesting* patterns
-- Motivated cognition
-    - "the influence of motives on memory, information processing & reasoning."
-
-::: {.notes}
-Selection needn't be deliberate
-
-Andrew Gelman's phrase - forking paths
-
-In psychology, the term "motivated cognition" - we are pre-disposed to find evidence for things we want to believe
-
-Journals want to publish interesting stories
-:::
-
-## Publication bias & Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
-
-```{r darkmatter}
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-set.seed(456)
-y <- rnorm(10000, 0, 33)
-# hist(y)
-cutoff <- quantile(y, probs = 0.95)
-
-df_dens <- density(y, from = -100, to = 100) %$%
-  data.frame(x = x, y = y) %>%
-  mutate(area = x >= cutoff)
-names(df_dens) <- c("Effect_size", "Frequency", "Published")
-p_dark <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
-  geom_ribbon() +
-  scale_fill_manual(values = c("dark grey", "yellow")) +
-  geom_line(aes(y = Frequency)) +
-  geom_vline(xintercept = cutoff, colour = "red") +
-  annotate(geom = 'text', x = cutoff, y = 0.0125, colour = "red", label = 'Significant at p=5%', hjust = -0.1)
-print(p_dark)
-
-# remove the significance level criterion
-cutoff <- quantile(y, probs = 0.001)
-
-df_dens <- density(y, from = -100, to = 100) %$%
-  data.frame(x = x, y = y) %>%
-  mutate(area = x >= cutoff)
-names(df_dens) <- c("Effect_size", "Frequency", "Published")
-p_light <- ggplot(data = df_dens, aes(x = Effect_size, ymin = 0, ymax = Frequency, fill = Published)) +
-  geom_ribbon() +
-  scale_fill_manual(values = c("dark grey", "yellow")) +
-  geom_line(aes(y = Frequency))
-```
-
-We can only see 5% of the universe.
-
-::: {.notes}
-Analogy with dark matter
-
-Meta-analysis - most of it is trying to estimate the unknown latent variable of what isn't published
-:::
-
-## The ASA statement
-::: columns
-::: {.column width="50%"}
-![](images/Wasserstein.png)
-
-2016
-:::
-::: {.column width="50%"}
-![](images/Wasserstein2.png)
-2019
-:::
-:::
- Stop using *p* values and "statistical significance".
-
-::: {.notes}
-Reproducibility Crisis is accepted as mainstream idea
-
-ASA have had had two Special Issues and Statements saying ...
-
-But not much has changed
-:::
+# Solutions
 
 ## Changes in biomedical research
 
@@ -275,6 +300,17 @@ But not much has changed
 - state analysis methods *a priori*
 - limits "hypothesising after results are known"
 - publish results irrespective of outcome
+
+## Effect of pre-registration
+
+::: columns
+::: {.column width="50%"}
+![](images/effect_of_preregistration.png)
+:::
+::: {.column width="50%"}
+![](images/effect_of_preregistration2.png)
+:::
+:::
 
 ## Changes in ecological research
 
