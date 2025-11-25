@@ -122,18 +122,9 @@ Meta-analysis - most of it is trying to estimate the unknown latent variable of 
 :::
 :::
 
-## High "false discovery rates"
-Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when:
-
-1. Sample size is small (low "statistical power")
-2. Effect size is small low signal:noise
-3. Greater number of alternative hypotheses/possible covariates
-4. Greater flexibility in designs, definitions, outcomes, and analytical modes
-5. Greater vested interests / prejudices
-6. Bias - systematic uncertainties in observation process
 
 ## High "false discovery rates"
-Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when:
+Probability of obtaining false positives is greater when:
 
 1. Sample size is small (low "statistical power")
 2. Effect size is small low signal:noise
@@ -184,28 +175,6 @@ In psychology, the term "motivated cognition" - we are pre-disposed to find evid
 Journals want to publish interesting stories
 :::
 
-## The ASA statement
-::: columns
-::: {.column width="50%"}
-![](images/Wasserstein.png)
-
-2016
-:::
-::: {.column width="50%"}
-![](images/Wasserstein2.png)
-2019
-:::
-:::
- Stop using *p* values and "statistical significance".
-
-::: {.notes}
-Reproducibility Crisis is accepted as mainstream idea
-
-ASA have had had two Special Issues and Statements saying ...
-
-But not much has changed
-:::
-
 
 ## The medical screening paradox
 ![](images/false_discovery_covid.png)
@@ -218,48 +187,9 @@ Disesaes are rare in the population - say 1%
 Take 1000 people, only 10 will have it
 :::
 
-## The effect of low power
-```{r plotfdr}
-alpha <- 0.05
-v_power <- c(0.2, 0.4, 0.8)
-v_prior <- seq(from = 0, to = 1, by = 0.01)
-v_bias  <- seq(from = 0, to = 1, by = 0.05)
-dt <- as.data.table(expand.grid(power = v_power, prior = v_prior, u = v_bias))
-
-# expected fdr, from Colquhoun 2014
-dt[, ppv := (prior * power)  / (prior * power  + alpha * (1 - prior))]
-dt[, fdr := 1 - ppv]
-
-# without bias, from Ioannidis 2005
-dt[, R := prior / (1- prior)] # prior odds
-# dt[, PPV := power * R / (R - (1 - power) * R + alpha)]
-# with bias, u, from Ioannidis 2005
-dt[, ppv_u := (power * R + u * (1- power) * R) /
-  (R + alpha - (1 - power) * R + u - u * alpha + u * (1 - power) * R)]
-dt[, fdr_u := 1 - ppv_u]
-
-p <- ggplot(dt[power == 0.8], aes(prior, fdr*100, colour = as.factor(power), group = power))
-p <- p + geom_line() + ylim(0, 100)
-p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
-# add legend title
-p <- p + scale_color_discrete(name = "Power")
-```
-
-```{r lowpower}
-p <- ggplot(dt, aes(prior, fdr*100, colour = as.factor(power), group = power))
-p <- p + geom_line() + ylim(0, 100)
-p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
-# add legend title
-p <- p + scale_color_discrete(name = "Power")
-p
-```
-
-::: {.notes}
-All predictable with simple calculation
-:::
 
 # Does this apply in ecology?
-## Low power in ecology
+## Low signal to noise ratio in ecology
 
 - large background variability cf. effect size
 - difficulty of measurement
@@ -304,17 +234,18 @@ All predictable with simple calculation
 ## Results
 
 ::: columns
-::: {.column width="70%"}
+::: {.column width="65%"}
 
-- Reduced vs unmanipulated: *0.01 (0.07)*
-- Enlarged vs unmanipulated: *-1.10 (0.07)*
-- Enlarged vs reduced: *-1.11 (0.07)*
-- Brood count after manipulation: *-0.14 (0.01)*
-- Change in brood count: *-0.18 (0.01)*
+- Choice of representation of sibling competition resulted in different ranges of analyst-estimated effects:
+- Reduced v unchanged: *-0.05* – *0*
+- Enlarged v unchanged: *-0.4* – *-0.15*
+- Enlarged v reduced: *-0.7* – *-0.15*
+- Count post-change: *-0.55* – *-0.2*
+- Change in count: *-0.7* – *-0.3*
 
 :::
 
-::: {.column width="30%"}
+::: {.column width="35%"}
 ![](images/gould_bluetit.png)
 :::
 :::
@@ -328,25 +259,23 @@ All predictable with simple calculation
 :::
 :::
 
-## Removal of perverse incentives
+## Changing incentives
 
-- San Francisco Declaration on Research Assessment
 - Goodhart's Law: *"When a measure becomes a target, it ceases to be a good measure"*
+- San Francisco Declaration on Research Assessment
+- Incentivising open sharing of data and code
+- Trying to deprioritise "significance" and "novelty"
 
-## Many-analyst and multiverse analysis
-
-::: columns 
-::: {.column width="50%"}
-- Gould et al did a multi-analyst study to evaluate impacts of analyst-choice
-- Also possible to do a multiverse analysis where you identify and do all the (reasonable) options yourself (e.g. Risbey et al, 2018)
+::: columns
+::: {.column width="40%"}
+![](images/Wasserstein.png)
 :::
-
-::: {.column width="50%"}
-![](images/risbey_multiverse.jpg)
+::: {.column width="20%"}
+:::
+::: {.column width="40%"}
+![](images/Wasserstein2.png)
 :::
 :::
-
-
 
 ## Registered reports
 ![](images/Registered-reports.png){width="50%"}
@@ -367,6 +296,21 @@ Pre-registration dramatically reduces the number of papers where the initial hyp
 ![](images/effect_of_preregistration2.png)
 :::
 :::
+
+## Many-analyst and multiverse analysis
+
+::: columns 
+::: {.column width="50%"}
+- Gould et al did a multi-analyst study to evaluate impacts of analyst-choice
+- Also possible to do a multiverse analysis where you identify and do all the (reasonable) options yourself (e.g. Risbey et al, 2018)
+:::
+
+::: {.column width="50%"}
+![](images/risbey_multiverse.jpg)
+:::
+:::
+
+
 
 ## Changes in ecological research
 
