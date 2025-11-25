@@ -11,7 +11,7 @@ format:
     chalkboard:
       buttons: false
     preview-links: auto
-    logo: images/logo/UKCEH-Logo_Short_Positive_RGB.png
+    logo: images/logo/UKCEH_Logo_Master_Black.png
 execute:
   cache: true
 ---
@@ -186,6 +186,181 @@ In psychology, the term "motivated cognition" - we are pre-disposed to find evid
 Journals want to publish interesting stories
 :::
 
+## Perverse incentives
+::: columns
+::: {.column width="60%"}
+![](images/growth_in_papers.png)
+:::
+::: {.column width="40%"}
+*"Publish or perish"*
+
+- incentives for quantity not quality
+- stresses peer review
+- lower quality
+:::
+:::
+
+# Does this apply in ecology?
+## Publication bias in ecology
+![](images/replication_graph.jpg)
+
+## Expected false discovery rate in ecology
+
+- Ecosystems are highly variable
+- Expected effect sizes are generally low
+- Properties are hard to measure
+- Our mechanistic knowledge is often limited
+
+
+## Same data, many analysts
+
+::: columns
+::: {.column width="75%"}
+- Experiment in Wytham Woods where brood size is either reduced, increased, or stays the same
+- Weight and foot length measured for chicks at 14 days old
+- Researchers asked: *"To what extent is the growth of nestling blue tits influenced by competition with siblings?"* 
+- Gould et al (2025)
+:::
+::: {.column width="25%"}
+![](images/blue_tit_Oulu.JPG)
+![](images/Blue_Tit_Nest.jpg)
+:::
+:::
+
+## Some decisions to be made....
+
+::: columns 
+::: {.column width="60%"}
+- What do we use to represent growth?
+- What do we use to represent competition with siblings?
+- What other variables do we need to take into account?
+- How do we take account of the structure of the data (i.e. nests within areas within regions of the wood)?
+:::
+
+::: {.column width="40%"}
+![](images/forking_paths.png)
+:::
+:::
+
+## Results
+
+::: columns
+::: {.column width="65%"}
+
+- Representation of sibling competition resulted in different ranges of analyst-estimated effects:
+- Reduced v unchanged: *-0.05* – *0*
+- Enlarged v unchanged: *-0.4* – *-0.15*
+- Enlarged v reduced: *-0.7* – *-0.15*
+- Count post-change: *-0.55* – *-0.2*
+- Change in count: *-0.7* – *-0.3*
+
+:::
+
+::: {.column width="35%"}
+![](images/gould_bluetit.png)
+:::
+:::
+
+# Solutions
+::: columns
+::: {.column width="60%"}
+:::
+::: {.column width="40%"}
+![](images/xkcd_replication_crisis_2x.png)
+:::
+:::
+
+## Changing incentives
+
+::: columns
+::: {.column width="70%"}
+- Goodharts Law: *"When a measure becomes a target, it ceases to be a good measure"*
+- San Francisco Declaration on Research Assessment
+- EU CoARA
+- Incentivising open sharing of data and code
+- Trying to deprioritise "significance" and "novelty"
+
+:::
+::: {.column width="30%"}
+![](images/dora_logo.png)
+![](images/coara_logo.png)
+![](images/Wasserstein2.png)
+:::
+:::
+
+
+
+## Registered reports
+![](images/Registered-reports.png){width="50%"}
+
+- publish study design at proposal stage
+- allow peer review *before* data collection
+- state analysis methods *a priori*
+- limits "hypothesising after results are known"
+- publish results irrespective of outcome
+
+## Effect of pre-registration
+
+::: columns
+::: {.column width="50%"}
+Pre-registration dramatically reduces the number of papers where the initial hypothesis is supported by the evidence 
+:::
+::: {.column width="50%"}
+![](images/effect_of_preregistration2.png)
+:::
+:::
+
+## Many-analyst and multiverse analysis
+
+::: columns 
+::: {.column width="50%"}
+- Gould et al did a multi-analyst study
+- Also possible to do a multiverse analysis where you identify and do all the options yourself (e.g. Risbey et al, 2018)
+:::
+
+::: {.column width="50%"}
+![](images/risbey_multiverse.jpg)
+:::
+:::
+
+
+# Discussion: What should we be doing in UKCEH to address this?
+
+
+# Supplemental
+
+
+
+
+## UK Parliament Inquiry
+::: columns
+::: {.column width="30%"}
+![](images/parliament_review.png)
+![](images/parliament.jpg)
+:::
+::: {.column width="70%"}
+![](images/parliament_review2.png)
+:::
+:::
+
+
+
+## Changes in ecological research
+
+::: columns
+::: {.column width="50%"}
+Much slower
+
+- registered reports introduced by BES
+- ...
+:::
+::: {.column width="50%"}
+![](images/sortee.png)
+![](images/ecol_sol_evid.jpg){width="50%"}
+:::
+:::
+
+
 ## The ASA statement
 ::: columns
 ::: {.column width="50%"}
@@ -259,165 +434,3 @@ p
 ::: {.notes}
 All predictable with simple calculation
 :::
-
-## Perverse incentives
-::: columns
-::: {.column width="60%"}
-![](images/growth_in_papers.png)
-:::
-::: {.column width="40%"}
-*"Publish or perish"*
-
-- incentives for quantity not quality
-- stresses peer review
-- lower quality
-:::
-:::
-
-# Does this apply in ecology?
-## Low power in ecology
-
-- large background variability cf. effect size
-- difficulty of measurement
-- small sample size
-- measurement error
-- measurements are a proxy for true process of interest
-    - error not propagated
-
-## Publication bias in ecology?
-![](images/replication_graph.jpg)
-
-## Same data, many analysts
-
-::: columns
-::: {.column width="75%"}
-- Experiment in Wytham Woods where brood size is either reduced, increased, or stays the same
-- Weight and tarsus length measured for chicks at 14 days old
-- Researchers asked: *"To what extent is the growth of nestling blue tits (Cyanistes caeruleus) influenced by competition with siblings?"* 
-- Gould et al (2025)
-:::
-::: {.column width="25%"}
-![](images/blue_tit_Oulu.JPG)
-![](images/Blue_Tit_Nest.jpg)
-:::
-:::
-
-## Some decisions to be made....
-
-::: columns 
-::: {.column width="60%"}
-- What do we use to represent growth?
-- What do we use to represent competition with siblings?
-- What other variables do we need to take into account?
-- How do we take account of the structure of the data (i.e. nests within areas within regions of the wood)?
-:::
-
-::: {.column width="40%"}
-![](images/forking_paths.png)
-:::
-:::
-
-## Results
-
-::: columns
-::: {.column width="70%"}
-
-- Reduced vs unmanipulated: *0.01 (0.07)*
-- Enlarged vs unmanipulated: *-1.10 (0.07)*
-- Enlarged vs reduced: *-1.11 (0.07)*
-- Brood count after manipulation: *-0.14 (0.01)*
-- Change in brood count: *-0.18 (0.01)*
-
-:::
-
-::: {.column width="30%"}
-![](images/gould_bluetit.png)
-:::
-:::
-
-# Solutions
-::: columns
-::: {.column width="60%"}
-:::
-::: {.column width="40%"}
-![](images/xkcd_replication_crisis_2x.png)
-:::
-:::
-
-## Removal of perverse incentives
-::: columns
-::: {.column width="60%"}
-![](images/sfdora.png)
-:::
-::: {.column width="40%"}
-![](images/coara.png)
-:::
-:::
-
-- San Francisco Declaration on Research Assessment (sfdora.org)
-- EU CoARA (www.coara.org)
-- Goodharts Law: *"When a measure becomes a target, it ceases to be a good measure"*
-
-## UK Parliament Inquiry
-::: columns
-::: {.column width="30%"}
-![](images/parliament_review.png)
-![](images/parliament.jpg)
-:::
-::: {.column width="70%"}
-![](images/parliament_review2.png)
-:::
-:::
-
-## Many-analyst and multiverse analysis
-
-::: columns 
-::: {.column width="50%"}
-- Gould et al did a multi-analyst study to evaluate impacts of analyst-choice
-- Also possible to do a multiverse analysis where you identify and do all the (reasonable) options yourself (e.g. Risbey et al, 2018)
-:::
-
-::: {.column width="50%"}
-![](images/risbey_multiverse.jpg)
-:::
-:::
-
-
-
-## Registered reports
-![](images/Registered-reports.png){width="50%"}
-
-- publish study design at proposal stage
-- allow peer review *before* data collection
-- state analysis methods *a priori*
-- limits "hypothesising after results are known"
-- publish results irrespective of outcome
-
-## Effect of pre-registration
-
-::: columns
-::: {.column width="50%"}
-Pre-registration dramatically reduces the number of papers where the initial hypothesis is supported by the evidence 
-:::
-::: {.column width="50%"}
-![](images/effect_of_preregistration2.png)
-:::
-:::
-
-## Changes in ecological research
-
-::: columns
-::: {.column width="50%"}
-Much slower
-
-- registered reports introduced by BES
-- ...
-:::
-::: {.column width="50%"}
-![](images/sortee.png)
-![](images/ecol_sol_evid.jpg){width="50%"}
-:::
-:::
-
-# Discussion: What should we be doing in UKCEH to address this?
-
