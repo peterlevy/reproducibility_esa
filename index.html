@@ -6,8 +6,8 @@
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Peter Levy &amp; Fiona Seaton">
   <meta name="dcterms.date" content="2025-11-26">
@@ -30,7 +30,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-0b15fa9fb8d8bd5c567013e449d09fbe.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-0f05b4ff918a5e2bcc85fdc99a3a757b.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -174,6 +174,7 @@ Peter Levy &amp; Fiona Seaton
 </section>
 <section id="the-reproducibility-crisis" class="slide level2">
 <h2>The “Reproducibility Crisis”</h2>
+<p>Repeated experiments often fail to confirm published results</p>
 <ul>
 <li>Reproducibility of <span style="color:red">results</span>, not methods</li>
 <li>Clear problems in psychology, social science &amp; biomedicine.</li>
@@ -193,11 +194,8 @@ Peter Levy &amp; Fiona Seaton
 <li>negative results</li>
 <li>confirmation / “me too” results</li>
 </ul></li>
-<li>Misinterpretation of statistics
-<ul>
-<li>=&gt; high “false discovery rates”</li>
-</ul></li>
-<li>Perverse incentives</li>
+<li>Misinterpretation of statistics</li>
+<li>Perverse incentives for scientists</li>
 </ol>
 </section>
 <section id="publication-bias" class="slide level2">
@@ -263,76 +261,49 @@ Peter Levy &amp; Fiona Seaton
 <li>small sample size or effect size</li>
 <li>cf.&nbsp;large variability</li>
 </ul></li>
+<li>Bias - unknown systematic effects on observations</li>
 <li>Weak causal theory
 <ul>
 <li>many possible alternative models/covariates</li>
 <li>flexibility in definitions &amp; outcomes</li>
 </ul></li>
-<li>Bias - unknown systematic effects in observation process</li>
-<li>Greater vested interests / prejudices</li>
 </ol>
 </section>
-<section id="high-false-discovery-rates-1" class="slide level2">
-<h2>High “false discovery rates”</h2>
-<p>Probability of obtaining <em>p</em> &lt; 0.05 when null hypothesis is true is greater when:</p>
-<ol type="1">
-<li>File drawering Researcher degrees of freedom</li>
-<li>Multiple testing</li>
-<li>Stopping rules</li>
-<li>Greater flexibility in designs, definitions, outcomes, and analytical modes</li>
-</ol>
-</section>
-<section id="hypothesising-after-results-are-known" class="slide level2">
-<h2>Hypothesising after results are known</h2>
+<section id="hypothesising-after-results-are-known-harking" class="slide level2">
+<h2>Hypothesising after results are known (“HARKing”)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
 <ul>
+<li>“Backwards science”</li>
 <li>Exploratory study presented as confirmation</li>
 </ul>
 </div><div class="column" style="width:65%;">
-<p><img data-src="images/harking.png" style="width:80.0%"></p>
+<p><img data-src="images/harking.png" style="width:100.0%"></p>
 </div></div>
 </section>
-<section id="hypothesising-after-results-are-known-1" class="slide level2">
-<h2>Hypothesising after results are known</h2>
+<section id="harking-in-practice" class="slide level2">
+<h2>HARKing in practice</h2>
 <div class="columns">
-<div class="column" style="width:35%;">
+<div class="column" style="width:75%;">
+<ol type="1">
+<li>Changing the model to fit the data
 <ul>
-<li>Hidden multiple testing problem</li>
-</ul>
-</div><div class="column" style="width:65%;">
-<p><img data-src="images/significant2.png" style="width:80.0%"></p>
+<li>model form (linear, …)</li>
+<li>what variables to include e.g.&nbsp;stepwise regression</li>
+<li>transformations (log, sqrt, …)</li>
+</ul></li>
+<li>Stopping rules
+<ul>
+<li>stop collecting data when p &lt; 0.05?</li>
+</ul></li>
+<li>Ignoring negative results
+<ul>
+<li>“file drawering”</li>
+</ul></li>
+</ol>
+</div><div class="column" style="width:25%;">
+<p><img data-src="images/harking.png" style="width:100.0%"></p>
 </div></div>
-</section>
-<section id="hypothesising-after-results-are-known-2" class="slide level2">
-<h2>Hypothesising after results are known</h2>
-<ul>
-<li>“Researcher degrees of freedom”
-<ul>
-<li>many possible choices in data collection &amp; analysis</li>
-<li>choices favour finding <em>interesting</em> patterns</li>
-</ul></li>
-<li>Motivated cognition
-<ul>
-<li>“the influence of motives on memory, information processing &amp; reasoning.”</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>Selection needn’t be deliberate</p>
-<p>Andrew Gelman’s phrase - forking paths</p>
-<p>In psychology, the term “motivated cognition” - we are pre-disposed to find evidence for things we want to believe</p>
-<p>Journals want to publish interesting stories</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section id="perverse-incentives" class="slide level2">
 <h2>Perverse incentives</h2>
@@ -354,7 +325,7 @@ Peter Levy &amp; Fiona Seaton
 
 </section>
 <section id="publication-bias-in-ecology" class="slide level2">
-<h2>Publication bias in ecology</h2>
+<h2>Publication bias in ecology?</h2>
 
 <img data-src="images/replication_graph.jpg" class="r-stretch"></section>
 <section id="expected-false-discovery-rate-in-ecology" class="slide level2">
@@ -754,7 +725,7 @@ Peter Levy &amp; Fiona Seaton
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -904,13 +875,14 @@ Peter Levy &amp; Fiona Seaton
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

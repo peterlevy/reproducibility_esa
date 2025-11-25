@@ -41,6 +41,8 @@ library(ggplot2)
 
 ## The "Reproducibility Crisis"
 
+Repeated experiments often fail to confirm published results
+
 - Reproducibility of [results]{style="color:red"}, not methods
 - Clear problems in psychology, social science & biomedicine.
 - Do these problems affect ecology?
@@ -53,8 +55,7 @@ library(ggplot2)
     - negative results
     - confirmation / "me too" results
 2. Misinterpretation of statistics
-    - => high "false discovery rates"
-3. Perverse incentives   
+3. Perverse incentives for scientists
 
 ## Publication bias
 ::: columns
@@ -129,61 +130,41 @@ Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when
 1. Low signal:noise (= low "statistical power")
     - small sample size or effect size
     - cf. large variability
-2. Weak causal theory
+2. Bias - unknown systematic effects on observations
+3. Weak causal theory
     - many possible alternative models/covariates
     - flexibility in definitions & outcomes
-3. Bias - unknown systematic effects in observation process
-4. Greater vested interests / prejudices
 
-## High "false discovery rates"
-Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when:
-
-1. File drawering
-Researcher degrees of freedom
-2. Multiple testing
-3. Stopping rules
-4. Greater flexibility in designs, definitions, outcomes, and analytical modes
-
-## Hypothesising after results are known
+## Hypothesising after results are known ("HARKing")
 
 ::: columns
 ::: {.column width="35%"}
+- "Backwards science"
 - Exploratory study presented as confirmation
 :::
 
 ::: {.column width="65%"}
-![](images/harking.png){width="80%"}
+![](images/harking.png){width="100%"}
 :::
 :::
 
-## Hypothesising after results are known
+## HARKing in practice
 
 ::: columns
-::: {.column width="35%"}
-- Hidden multiple testing problem
+::: {.column width="75%"}
+1. Changing the model to fit the data
+    - model form (linear, ...)
+    - what variables to include e.g. stepwise regression
+    - transformations (log, sqrt, ...)
+2. Stopping rules
+    - stop collecting data when p < 0.05?
+3. Ignoring negative results
+    - "file drawering"
 :::
 
-::: {.column width="65%"}
-![](images/significant2.png){width="80%"}
+::: {.column width="25%"}
+![](images/harking.png){width="100%"}
 :::
-:::
-
-
-## Hypothesising after results are known
-- "Researcher degrees of freedom"
-    - many possible choices in data collection & analysis
-    - choices favour finding *interesting* patterns
-- Motivated cognition
-    - "the influence of motives on memory, information processing & reasoning."
-
-::: {.notes}
-Selection needn't be deliberate
-
-Andrew Gelman's phrase - forking paths
-
-In psychology, the term "motivated cognition" - we are pre-disposed to find evidence for things we want to believe
-
-Journals want to publish interesting stories
 :::
 
 ## Perverse incentives
@@ -201,7 +182,7 @@ Journals want to publish interesting stories
 :::
 
 # Does this apply in ecology?
-## Publication bias in ecology
+## Publication bias in ecology?
 ![](images/replication_graph.jpg)
 
 ## Expected false discovery rate in ecology
