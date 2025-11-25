@@ -6,8 +6,8 @@
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.26">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
 
   <meta name="author" content="Peter Levy &amp; Fiona Seaton">
   <meta name="dcterms.date" content="2025-11-26">
@@ -30,7 +30,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-0f05b4ff918a5e2bcc85fdc99a3a757b.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-0b15fa9fb8d8bd5c567013e449d09fbe.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -165,12 +165,7 @@ Peter Levy &amp; Fiona Seaton
 <td>Fiona Seaton</td>
 </tr>
 <tr class="odd">
-<td>11:20-11:25</td>
-<td>Interactive Exercise</td>
-<td>All</td>
-</tr>
-<tr class="even">
-<td>11:20-11:25</td>
+<td>11:20-11:30</td>
 <td>Open Discussion</td>
 <td>All</td>
 </tr>
@@ -420,27 +415,74 @@ Peter Levy &amp; Fiona Seaton
 <img data-src="images/replication_graph.jpg" class="r-stretch"></section>
 <section id="same-data-many-analysts" class="slide level2">
 <h2>Same data, many analysts</h2>
-
-<img data-src="images/gould.png" class="r-stretch"></section></section>
+<div class="columns">
+<div class="column" style="width:75%;">
+<ul>
+<li>Experiment in Wytham Woods where brood size is either reduced, increased, or stays the same</li>
+<li>Weight and tarsus length measured for chicks at 14 days old</li>
+<li>Researchers asked: <em>“To what extent is the growth of nestling blue tits (Cyanistes caeruleus) influenced by competition with siblings?”</em></li>
+<li>Gould et al (2025)</li>
+</ul>
+</div><div class="column" style="width:25%;">
+<p><img data-src="images/blue_tit_Oulu.JPG"> <img data-src="images/Blue_Tit_Nest.jpg"></p>
+</div></div>
+</section>
+<section id="some-decisions-to-be-made." class="slide level2">
+<h2>Some decisions to be made….</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>What do we use to represent growth?</li>
+<li>What do we use to represent competition with siblings?</li>
+<li>What other variables do we need to take into account?</li>
+<li>How do we take account of the structure of the data (i.e.&nbsp;nests within areas within regions of the wood)?</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/forking_paths.png"></p>
+</div></div>
+</section>
+<section id="results" class="slide level2">
+<h2>Results</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li>Reduced vs unmanipulated: <em>0.01 (0.07)</em></li>
+<li>Enlarged vs unmanipulated: <em>-1.10 (0.07)</em></li>
+<li>Enlarged vs reduced: <em>-1.11 (0.07)</em></li>
+<li>Brood count after manipulation: <em>-0.14 (0.01)</em></li>
+<li>Change in brood count: <em>-0.18 (0.01)</em></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="images/gould_bluetit.png"></p>
+</div></div>
+</section></section>
 <section>
 <section id="solutions" class="title-slide slide level1 center">
 <h1>Solutions</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
 
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/xkcd_replication_crisis_2x.png"></p>
+</div></div>
 </section>
-<section id="changes-in-biomedical-research" class="slide level2">
-<h2>Changes in biomedical research</h2>
+<section id="removal-of-perverse-incentives" class="slide level2">
+<h2>Removal of perverse incentives</h2>
+<ul>
+<li>San Francisco Declaration on Research Assessment</li>
+<li>Goodhart’s Law: <em>“When a measure becomes a target, it ceases to be a good measure”</em></li>
+</ul>
+</section>
+<section id="many-analyst-and-multiverse-analysis" class="slide level2">
+<h2>Many-analyst and multiverse analysis</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>double-blind trials</li>
-<li>attention to hidden bias
-<ul>
-<li>placebos etc.</li>
-</ul></li>
-<li>pre-registration</li>
+<li>Gould et al did a multi-analyst study to evaluate impacts of analyst-choice</li>
+<li>Also possible to do a multiverse analysis where you identify and do all the (reasonable) options yourself (e.g.&nbsp;Risbey et al, 2018)</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<p><img data-src="images/Cochrane1.png"> <img data-src="images/ClinicalTrials.jpg"></p>
+<p><img data-src="images/risbey_multiverse.jpg"></p>
 </div></div>
 </section>
 <section id="registered-reports" class="slide level2">
@@ -458,7 +500,7 @@ Peter Levy &amp; Fiona Seaton
 <h2>Effect of pre-registration</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img data-src="images/effect_of_preregistration.png"></p>
+<p>Pre-registration dramatically reduces the number of papers where the initial hypothesis is supported by the evidence</p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="images/effect_of_preregistration2.png"></p>
 </div></div>
@@ -475,46 +517,11 @@ Peter Levy &amp; Fiona Seaton
 </div><div class="column" style="width:50%;">
 <p><img data-src="images/sortee.png"> <img data-src="images/ecol_sol_evid.jpg" style="width:50.0%"></p>
 </div></div>
-</section>
-<section id="summary" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
-<h2>Summary</h2>
-
-<img data-src="index_files/figure-revealjs/darkmatter2-1.png" width="960" class="r-stretch"><p>Don’t focus on testing a null hypothesis.</p>
-<aside class="notes">
-<p>Solution is simple</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="summary-1" class="slide level2" data-background="#43464B" data-background-image="images/milky-way.jpeg">
-<h2>Summary</h2>
-
-<img data-src="index_files/figure-revealjs/darkmatter3-1.png" width="960" class="r-stretch"><p>Pre-register and publish <span style="color:yellow">all</span> results.</p>
-<!--- {reproducibility crisis -->
-<aside class="notes">
-<p>but takes time and a shift in culture</p>
-<p>But has already happened in medicine</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-
 </section></section>
+<section id="discussion-what-should-we-be-doing-in-ukceh-to-address-this" class="title-slide slide level1 center">
+<h1>Discussion: What should we be doing in UKCEH to address this?</h1>
+
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="images/logo/UKCEH-Logo_Short_Positive_RGB.png" class="slide-logo"></p>
@@ -707,7 +714,7 @@ Peter Levy &amp; Fiona Seaton
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -857,14 +864,13 @@ Peter Levy &amp; Fiona Seaton
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
             }
-          }
-          return codeEl.innerText;
+            return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
