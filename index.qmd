@@ -49,11 +49,12 @@ library(ggplot2)
 
 ## Reproducibility Crisis: Causes
 
-1. Publication bias against
+1. Publication bias against:
     - negative results
     - confirmation / "me too" results
 2. Misinterpretation of statistics
-    - -> high "false discovery rates"
+    - => high "false discovery rates"
+3. Perverse incentives   
 
 ## Publication bias
 ::: columns
@@ -125,22 +126,23 @@ Meta-analysis - most of it is trying to estimate the unknown latent variable of 
 ## High "false discovery rates"
 Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when:
 
-1. Sample size is small (low "statistical power")
-2. Effect size is small low signal:noise
-3. Greater number of alternative hypotheses/possible covariates
-4. Greater flexibility in designs, definitions, outcomes, and analytical modes
-5. Greater vested interests / prejudices
-6. Bias - systematic uncertainties in observation process
+1. Low signal:noise (= low "statistical power")
+    - small sample size or effect size
+    - cf. large variability
+2. Weak causal theory
+    - many possible alternative models/covariates
+    - flexibility in definitions & outcomes
+3. Bias - unknown systematic effects in observation process
+4. Greater vested interests / prejudices
 
 ## High "false discovery rates"
 Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when:
 
-1. Sample size is small (low "statistical power")
-2. Effect size is small low signal:noise
-3. Greater number of alternative hypotheses/possible covariates
+1. File drawering
+Researcher degrees of freedom
+2. Multiple testing
+3. Stopping rules
 4. Greater flexibility in designs, definitions, outcomes, and analytical modes
-5. Greater vested interests / prejudices
-6. Bias - systematic uncertainties in observation process
 
 ## Hypothesising after results are known
 
@@ -258,6 +260,20 @@ p
 All predictable with simple calculation
 :::
 
+## Perverse incentives
+::: columns
+::: {.column width="60%"}
+![](images/growth_in_papers.png)
+:::
+::: {.column width="40%"}
+*"Publish or perish"*
+
+- incentives for quantity not quality
+- stresses peer review
+- lower quality
+:::
+:::
+
 # Does this apply in ecology?
 ## Low power in ecology
 
@@ -329,9 +345,29 @@ All predictable with simple calculation
 :::
 
 ## Removal of perverse incentives
+::: columns
+::: {.column width="60%"}
+![](images/sfdora.png)
+:::
+::: {.column width="40%"}
+![](images/coara.png)
+:::
+:::
 
-- San Francisco Declaration on Research Assessment
-- Goodhart's Law: *"When a measure becomes a target, it ceases to be a good measure"*
+- San Francisco Declaration on Research Assessment (sfdora.org)
+- EU CoARA (www.coara.org)
+- Goodharts Law: *"When a measure becomes a target, it ceases to be a good measure"*
+
+## UK Parliament Inquiry
+::: columns
+::: {.column width="30%"}
+![](images/parliament_review.png)
+![](images/parliament.jpg)
+:::
+::: {.column width="70%"}
+![](images/parliament_review2.png)
+:::
+:::
 
 ## Many-analyst and multiverse analysis
 
