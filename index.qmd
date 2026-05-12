@@ -1,8 +1,8 @@
 ---
 title: "Tackling the Reproducibility Crisis In Ecology"
-subtitle: "UKCEH Discovery Week 2025"
-author: "Peter Levy & Fiona Seaton"
-date: "</br> '2025-11-26'"
+subtitle: "UKCEH Reproducibility Session 2026"
+author: "Peter Levy, Fiona Seaton & Joe Marsh Rossney"
+date: "</br> '2026 June'"
 footer: "[peterlevy.github.io/reproducibility_esa](https://peterlevy.github.io/reproducibility_esa/)"
 format:
   revealjs:
@@ -33,6 +33,8 @@ library(ggplot2)
 
 ## Schedule
 
+*This is the old one, to be re-done*
+
 | Time | Topic | Who |
 | ----- | ----- | ----- |
 | 11:00-11:10 | Causes  | Peter Levy | 
@@ -56,19 +58,6 @@ Repeated experiments often fail to confirm published results
     - confirmation / "me too" results
 2. Misinterpretation of statistics
 3. Perverse incentives for scientists
-
-## Publication bias
-::: columns
-::: {.column width="80%"}
-![](images/bem_paper.png)
-
-- Results failed to reproduce in other studies
-- Journals [would not publish]{style="color:red"} these "negative" studies
-:::
-::: {.column width="20%"}
-![Bem 2011 "proves pre-cognition".](images/psychic.jpg)
-:::
-:::
 
 ## Publication bias & Dark Matter {background="#43464B" background-image="images/milky-way.jpeg"}
 ```{r darkmatter}
@@ -124,17 +113,6 @@ Meta-analysis - most of it is trying to estimate the unknown latent variable of 
 :::
 :::
 
-## High "false discovery rates"
-Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when:
-
-1. Low signal:noise (= low "statistical power")
-    - small sample size or effect size
-    - cf. large variability
-2. Bias - unknown systematic effects on observations
-3. Weak causal theory
-    - many possible alternative models/covariates
-    - flexibility in definitions & outcomes
-
 ## Hypothesising after results are known ("HARKing")
 
 ::: columns
@@ -144,25 +122,6 @@ Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when
 :::
 
 ::: {.column width="65%"}
-![](images/harking.png){width="100%"}
-:::
-:::
-
-## HARKing in practice
-
-::: columns
-::: {.column width="75%"}
-1. Changing the model to fit the data
-    - model form (linear, ...)
-    - what variables to include e.g. stepwise regression
-    - transformations (log, sqrt, ...)
-2. Stopping rules
-    - stop collecting data when p < 0.05?
-3. Ignoring negative results
-    - "file drawering"
-:::
-
-::: {.column width="25%"}
 ![](images/harking.png){width="100%"}
 :::
 :::
@@ -181,66 +140,12 @@ Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when
 :::
 :::
 
-# Does this apply in ecology?
-## Publication bias in ecology?
-![](images/replication_graph.jpg)
-
 ## Expected false discovery rate in ecology
 
 - Ecosystems are highly variable
 - Expected effect sizes are generally low
 - Properties are hard to measure
 - Our mechanistic knowledge is often limited
-
-
-## Same data, many analysts
-
-::: columns
-::: {.column width="75%"}
-- Experiment in Wytham Woods where brood size is either reduced, increased, or stays the same
-- Weight and foot length measured for chicks at 14 days old
-- Researchers asked: *"To what extent is the growth of nestling blue tits influenced by competition with siblings?"* 
-- Gould et al (2025)
-:::
-::: {.column width="25%"}
-![](images/blue_tit_Oulu.JPG)
-![](images/Blue_Tit_Nest.jpg)
-:::
-:::
-
-## Some decisions to be made....
-
-::: columns 
-::: {.column width="60%"}
-- What do we use to represent growth?
-- What do we use to represent competition with siblings?
-- What other variables do we need to take into account?
-- How do we take account of the structure of the data (i.e. nests within areas within regions of the wood)?
-:::
-
-::: {.column width="40%"}
-![](images/forking_paths.png)
-:::
-:::
-
-## Results
-
-::: columns
-::: {.column width="65%"}
-
-- Representation of sibling competition resulted in different ranges of analyst-estimated effects:
-- Reduced v unchanged: *-0.05* – *0*
-- Enlarged v unchanged: *-0.4* – *-0.15*
-- Enlarged v reduced: *-0.7* – *-0.15*
-- Count post-change: *-0.55* – *-0.2*
-- Change in count: *-0.7* – *-0.3*
-
-:::
-
-::: {.column width="35%"}
-![](images/gould_bluetit.png)
-:::
-:::
 
 # Solutions
 ::: columns
@@ -269,8 +174,6 @@ Probability of obtaining *p* < 0.05 when null hypothesis is true is greater when
 :::
 :::
 
-
-
 ## Registered reports
 ![](images/Registered-reports.png){width="50%"}
 
@@ -291,12 +194,12 @@ Pre-registration dramatically reduces the number of papers where the initial hyp
 :::
 :::
 
-## Many-analyst and multiverse analysis
+## Multiverse analyses
 
 ::: columns 
 ::: {.column width="50%"}
-- Gould et al did a multi-analyst study
-- Also possible to do a multiverse analysis where you identify and do all the options yourself (e.g. Risbey et al, 2018)
+- Same data, many analysts
+- or identify all the options yourself
 :::
 
 ::: {.column width="50%"}
@@ -305,12 +208,7 @@ Pre-registration dramatically reduces the number of papers where the initial hyp
 :::
 
 
-# Discussion: What should we be doing in UKCEH to address this?
-
-
-# Supplemental
-
-
+# Discussion: What should UKCEH be doing to address this?
 
 
 ## UK Parliament Inquiry
@@ -324,94 +222,14 @@ Pre-registration dramatically reduces the number of papers where the initial hyp
 :::
 :::
 
+## Some ideas for UKCEH ...
 
+- training?
+- stats support?
+- include reproducibility in data management plan?
+    - e.g. pre-registration of analyses
+- incentives for good practice? 
+    - ex/internal reviewing?
+    - quality vs quantity of publications
+    - publishing negative results & data
 
-## Changes in ecological research
-
-::: columns
-::: {.column width="50%"}
-Much slower
-
-- registered reports introduced by BES
-- ...
-:::
-::: {.column width="50%"}
-![](images/sortee.png)
-![](images/ecol_sol_evid.jpg){width="50%"}
-:::
-:::
-
-
-## The ASA statement
-::: columns
-::: {.column width="50%"}
-![](images/Wasserstein.png)
-
-2016
-:::
-::: {.column width="50%"}
-![](images/Wasserstein2.png)
-2019
-:::
-:::
- Stop using *p* values and "statistical significance".
-
-::: {.notes}
-Reproducibility Crisis is accepted as mainstream idea
-
-ASA have had had two Special Issues and Statements saying ...
-
-But not much has changed
-:::
-
-
-## The medical screening paradox
-![](images/false_discovery_covid.png)
-
-::: {.notes}
-First of these is the same as the medical screening paradox - familiar from covid
-
-Disesaes are rare in the population - say 1%
-
-Take 1000 people, only 10 will have it
-:::
-
-## The effect of low power
-```{r plotfdr}
-alpha <- 0.05
-v_power <- c(0.2, 0.4, 0.8)
-v_prior <- seq(from = 0, to = 1, by = 0.01)
-v_bias  <- seq(from = 0, to = 1, by = 0.05)
-dt <- as.data.table(expand.grid(power = v_power, prior = v_prior, u = v_bias))
-
-# expected fdr, from Colquhoun 2014
-dt[, ppv := (prior * power)  / (prior * power  + alpha * (1 - prior))]
-dt[, fdr := 1 - ppv]
-
-# without bias, from Ioannidis 2005
-dt[, R := prior / (1- prior)] # prior odds
-# dt[, PPV := power * R / (R - (1 - power) * R + alpha)]
-# with bias, u, from Ioannidis 2005
-dt[, ppv_u := (power * R + u * (1- power) * R) /
-  (R + alpha - (1 - power) * R + u - u * alpha + u * (1 - power) * R)]
-dt[, fdr_u := 1 - ppv_u]
-
-p <- ggplot(dt[power == 0.8], aes(prior, fdr*100, colour = as.factor(power), group = power))
-p <- p + geom_line() + ylim(0, 100)
-p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
-# add legend title
-p <- p + scale_color_discrete(name = "Power")
-```
-
-```{r lowpower}
-p <- ggplot(dt, aes(prior, fdr*100, colour = as.factor(power), group = power))
-p <- p + geom_line() + ylim(0, 100)
-p <- p + xlab("Prior probability") + ylab("False Discovery Rate (%)")
-# add legend title
-p <- p + scale_color_discrete(name = "Power")
-p
-```
-
-::: {.notes}
-All predictable with simple calculation
-:::
