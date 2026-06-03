@@ -40,6 +40,7 @@ library(ggplot2)
 | 11:00-11:10 | Causes  | Peter Levy | 
 | 11:10-11:20 | Solutions | Fiona Seaton |
 | 11:20-11:30 | Open Discussion | All |
+| t-t+5 | Reproducible software | Joe |
 
 ## The "Reproducibility Crisis"
 
@@ -232,4 +233,37 @@ Pre-registration dramatically reduces the number of papers where the initial hyp
     - ex/internal reviewing?
     - quality vs quantity of publications
     - publishing negative results & data
+
+
+# Reproducibility in software
+
+Main points to cover:
+
+- Motivating example?
+- Why reproducible software / analysis is tricky, or poor in practice
+- Low hanging fruit
+  - For important analysis, avoid stateful "sessions" where order of execution is ambiguous - at least run from scratch
+  - Restraint on the packages
+  - Treat data preparation / preprocessing as first-class
+- Next steps
+  - Version control
+  - Dedicated project environment
+  - Scripts not sessions
+  - Read-only data
+- Even better
+  - Dependency version pinning + lockfiles
+  - Versioned data
+  - RNG seeds
+  - Tagged commits + specific releases to accompany paper
+- More on dependency management (probably won't have time for this)
+  - dedicated environments
+  - version pinning 
+  - lockfiles
+  - tools: renv, pip-tools/poetry/uv
+  - Probably overkill but worth being aware of: containers, VMs
+- Take-home
+  - Don't let the perfect be the enemy of the good: doing some of the suggested things is much better than doing none!
+  - RSEs can help! We love this shit - please feel free to reach out
+  - What can we do to make it easier for IT + SciCom to support our preferred tools + workflows for reproducibility?
+
 
